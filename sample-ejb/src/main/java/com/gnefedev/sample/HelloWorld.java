@@ -1,6 +1,7 @@
 package com.gnefedev.sample;
 
 import javax.ejb.MessageDriven;
+import javax.inject.Inject;
 import javax.jms.Message;
 import javax.jms.MessageListener;
 
@@ -9,7 +10,8 @@ import javax.jms.MessageListener;
  */
 @MessageDriven
 public class HelloWorld implements MessageListener {
-    private final String greetings = FromCore.getGreetings();
+    @Inject
+    private FromCore fromCore;
 
     public void onMessage(Message message) {
 

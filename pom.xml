@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.gnefedev</groupId>
-    <artifactId>ear.sample</artifactId>
+    <artifactId>javaee.sample</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <modules>
@@ -13,14 +13,14 @@
         <module>sample-war</module>
         <module>sample-ejb</module>
         <module>sample-ear</module>
+        <module>sample-test</module>
     </modules>
 
     <properties>
-        <sample-war.version>1.0-SNAPSHOT</sample-war.version>
-        <sample-ejb.version>1.0-SNAPSHOT</sample-ejb.version>
-        <sample-core.version>1.0-SNAPSHOT</sample-core.version>
+        <sample.version>1.0-SNAPSHOT</sample.version>
         <encoding>UTF-8</encoding>
         <java-version>1.7</java-version>
+        <spring.version>4.2.2.RELEASE</spring.version>
     </properties>
 
     <dependencyManagement>
@@ -28,18 +28,24 @@
             <dependency>
                 <groupId>com.gnefedev</groupId>
                 <artifactId>sample-core</artifactId>
-                <version>${sample-core.version}</version>
+                <version>${sample.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.gnefedev</groupId>
                 <artifactId>sample-war</artifactId>
-                <version>${sample-war.version}</version>
+                <version>${sample.version}</version>
+                <type>war</type>
+            </dependency>
+            <dependency>
+                <groupId>com.gnefedev</groupId>
+                <artifactId>sample-test</artifactId>
+                <version>${sample.version}</version>
                 <type>war</type>
             </dependency>
             <dependency>
                 <groupId>com.gnefedev</groupId>
                 <artifactId>sample-ejb</artifactId>
-                <version>${sample-ejb.version}</version>
+                <version>${sample.version}</version>
                 <type>ejb</type>
             </dependency>
 
@@ -47,6 +53,22 @@
                 <groupId>javax</groupId>
                 <artifactId>javaee-api</artifactId>
                 <version>7.0</version>
+            </dependency>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.8</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-webmvc</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-oxm</artifactId>
+                <version>${spring.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

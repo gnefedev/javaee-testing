@@ -4,10 +4,16 @@
 	"http://java.sun.com/dtd/application_1_3.dtd">
 <application>
   <display-name>sample-ear</display-name>
+  <!--<module>-->
+    <!--<web>-->
+      <!--<web-uri>sample-war.war</web-uri>-->
+      <!--<context-root>/sample</context-root>-->
+    <!--</web>-->
+  <!--</module>-->
   <module>
     <web>
-      <web-uri>sample-war.war</web-uri>
-      <context-root>/sample</context-root>
+      <web-uri>sample-test.war</web-uri>
+      <context-root>/test</context-root>
     </web>
   </module>
   <module>
