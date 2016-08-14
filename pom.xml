@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.gnefedev</groupId>
+    <artifactId>ear.sample</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>sample-core</module>
+        <module>sample-war</module>
+        <module>sample-ejb</module>
+        <module>sample-ear</module>
+    </modules>
+
+    <properties>
+        <sample-war.version>1.0-SNAPSHOT</sample-war.version>
+        <sample-ejb.version>1.0-SNAPSHOT</sample-ejb.version>
+        <sample-core.version>1.0-SNAPSHOT</sample-core.version>
+        <encoding>UTF-8</encoding>
+        <java-version>1.7</java-version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.gnefedev</groupId>
+                <artifactId>sample-core</artifactId>
+                <version>${sample-core.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.gnefedev</groupId>
+                <artifactId>sample-war</artifactId>
+                <version>${sample-war.version}</version>
+                <type>war</type>
+            </dependency>
+            <dependency>
+                <groupId>com.gnefedev</groupId>
+                <artifactId>sample-ejb</artifactId>
+                <version>${sample-ejb.version}</version>
+                <type>ejb</type>
+            </dependency>
+
+            <dependency>
+                <groupId>javax</groupId>
+                <artifactId>javaee-api</artifactId>
+                <version>7.0</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <configuration>
+                        <source>${java-version}</source>
+                        <target>${java-version}</target>
+                        <encoding>${encoding}</encoding>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>2.3</version>
+                    <configuration>
+                        <encoding>${encoding}</encoding>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-ear-plugin</artifactId>
+                    <version>2.10.1</version>
+                    <configuration>
+                        <skinnyWars>true</skinnyWars>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <version>2.6</version>
+                    <configuration>
+                        <failOnMissingWebXml>false</failOnMissingWebXml>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-ejb-plugin</artifactId>
+                    <version>2.5.1</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+</project>
