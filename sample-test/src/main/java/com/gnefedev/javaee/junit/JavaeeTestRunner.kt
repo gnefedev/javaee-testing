@@ -14,7 +14,7 @@ constructor(private val klass: Class<*>) : BlockJUnit4ClassRunner(klass) {
 
     @Throws(Exception::class)
     override fun createTest(): Any {
-        if (initialContext != null) {
+        if (inServer) {
             return initialContext!!.lookup("java:module/${klass.simpleName}")
         } else {
             return super.createTest()
@@ -22,7 +22,11 @@ constructor(private val klass: Class<*>) : BlockJUnit4ClassRunner(klass) {
     }
 
     override fun methodInvoker(method: FrameworkMethod?, test: Any?): Statement {
-        return WebMethodInvoker(method!!)
+        if (inServer) {
+            return super.methodInvoker(method, test)
+        } else {
+            return WebMethodInvoker(method!!)
+        }
     }
 
     companion object {
@@ -37,5 +41,7 @@ constructor(private val klass: Class<*>) : BlockJUnit4ClassRunner(klass) {
             }
             context
         }
+
+        private val inServer = initialContext != null
     }
 }

@@ -15,7 +15,7 @@ import static org.junit.Assert.assertEquals;
  */
 @Stateless
 @RunWith(JavaeeTestRunner.class)
-public class SampleTest {
+public class TestInject {
     @Inject
     private FromCore fromCore;
 
