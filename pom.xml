@@ -71,18 +71,6 @@
                 <artifactId>spring-oxm</artifactId>
                 <version>${spring.version}</version>
             </dependency>
-
-            <dependency>
-                <groupId>com.fasterxml.jackson.core</groupId>
-                <artifactId>jackson-core</artifactId>
-                <version>${jackson.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.fasterxml.jackson.core</groupId>
-                <artifactId>jackson-databind</artifactId>
-                <version>${jackson.version}</version>
-            </dependency>
-
         </dependencies>
     </dependencyManagement>
 
@@ -109,6 +97,7 @@
                     <version>2.10.1</version>
                     <configuration>
                         <skinnyWars>true</skinnyWars>
+                        <generateApplicationXml>false</generateApplicationXml>
                     </configuration>
                 </plugin>
                 <plugin>

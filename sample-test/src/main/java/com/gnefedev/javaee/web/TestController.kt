@@ -24,7 +24,7 @@ class TestController {
         return response
     }
 
-    @RequestMapping("/test/{testClass}/{methodName}", produces = arrayOf(MediaType.APPLICATION_JSON_VALUE))
+    @RequestMapping("/test/{testClass}/{methodName}", produces = arrayOf(MediaType.APPLICATION_XML_VALUE))
     fun runMethod(@PathVariable testClass: Class<*>, @PathVariable methodName: String): TestResponse<*> {
         val junit = JUnitCore()
         val result = junit.run(Request.method(testClass, methodName))
