@@ -1,7 +1,9 @@
 package com.gnefedev.javaee.junit
 
 import org.junit.runners.BlockJUnit4ClassRunner
+import org.junit.runners.model.FrameworkMethod
 import org.junit.runners.model.InitializationError
+import org.junit.runners.model.Statement
 import javax.naming.InitialContext
 
 /**
@@ -17,6 +19,10 @@ constructor(private val klass: Class<*>) : BlockJUnit4ClassRunner(klass) {
         } else {
             return super.createTest()
         }
+    }
+
+    override fun methodInvoker(method: FrameworkMethod?, test: Any?): Statement {
+        return WebMethodInvoker(method!!)
     }
 
     companion object {

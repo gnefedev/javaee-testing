@@ -18,6 +18,6 @@ public class TestJUnit {
         for (Failure failure : result.getFailures()) {
             System.out.println(failure.getTrace());
         }
-        assertEquals(1, result.getFailureCount());
+        assertEquals(0, result.getFailureCount());
     }
 }
