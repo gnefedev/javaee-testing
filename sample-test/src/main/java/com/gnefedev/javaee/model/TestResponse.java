@@ -14,6 +14,7 @@ public class TestResponse<T extends Throwable> {
     private TestStatus status = TestStatus.SUCCESS;
     @XmlJavaTypeAdapter(ThrowableAdapter.class)
     private T error = null;
+    private String sessionId = null;
 
     public TestResponse() {
     }
@@ -37,5 +38,13 @@ public class TestResponse<T extends Throwable> {
 
     public void setError(T error) {
         this.error = error;
+    }
+
+    public String getSessionId() {
+        return sessionId;
+    }
+
+    public void setSessionId(String sessionId) {
+        this.sessionId = sessionId;
     }
 }
