@@ -18,4 +18,9 @@ public class TestErrors {
     public void assertFail() {
         assertTrue("assertFail message", false);
     }
+    @Test
+    public void npe() {
+        String nullable = null;
+        nullable.length();
+    }
 }
