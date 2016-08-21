@@ -1,6 +1,7 @@
 package com.gnefedev.javaee.web
 
 import com.gnefedev.javaee.model.TestResponse
+import com.gnefedev.javaee.model.TestStatus
 import com.gnefedev.javaee.test.TestInject
 import org.junit.runner.JUnitCore
 import org.junit.runner.Request
@@ -24,14 +25,14 @@ class TestController {
     }
 
     @RequestMapping("/test/{testClass}/{methodName}", produces = arrayOf(MediaType.APPLICATION_JSON_VALUE))
-    fun runMethod(@PathVariable testClass: Class<*>, @PathVariable methodName: String): TestResponse {
+    fun runMethod(@PathVariable testClass: Class<*>, @PathVariable methodName: String): TestResponse<*> {
         val junit = JUnitCore()
         val result = junit.run(Request.method(testClass, methodName))
         if (result.failureCount == 0) {
-            return TestResponse()
+            return TestResponse(TestStatus.SUCCESS, Throwable())
         } else {
             val failure = result.failures.first()
-            return TestResponse(true, failure.exception.cause!!.message?:"")
+            return TestResponse(TestStatus.ERROR, failure.exception.cause)
         }
     }
 

@@ -3,6 +3,5 @@ package com.gnefedev.javaee.model
 /**
  * Created by gerakln on 21.08.16.
  */
-data class TestResponse(val error: Boolean, val message: String) {
-    constructor() : this(false, "")
+data class TestResponse<out T : Throwable>(val status: TestStatus = TestStatus.SUCCESS, val error: T? = null) {
 }

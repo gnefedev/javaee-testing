@@ -1,6 +1,7 @@
 package com.gnefedev.javaee.test
 
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.Test
 import org.junit.runner.JUnitCore
 
@@ -22,13 +23,11 @@ class TestJUnit {
     fun testErrors() {
         val junit = JUnitCore()
         val result = junit.run(TestErrors::class.java)
-        result.failures.forEach {
-            println(it.trace)
-        }
         assertEquals(1, result.failureCount.toLong())
         val assertFail = result.failures
                 .filter { it.description.methodName == "assertFail" }
                 .last()
         assertEquals("assertFail message", assertFail.message)
+        assertTrue(assertFail.exception.javaClass.name, assertFail.exception is AssertionError)
     }
 }

@@ -1,6 +1,7 @@
 package com.gnefedev.javaee.junit
 
 import com.gnefedev.javaee.model.TestResponse
+import com.gnefedev.javaee.model.TestStatus
 import org.junit.runners.model.FrameworkMethod
 import org.junit.runners.model.Statement
 
@@ -15,8 +16,8 @@ internal class WebMethodInvoker(val method: FrameworkMethod) : Statement() {
         val response = RestTemplateForTest.template
                 .getForEntity(uri, TestResponse::class.java)
                 .body
-        if (response.error) {
-            throw AssertionError(response.message)
+        if (response.status == TestStatus.ERROR) {
+            throw response.error!!
         }
     }
 }
