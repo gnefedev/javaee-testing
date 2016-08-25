@@ -1,7 +1,7 @@
 package com.gnefedev.javaee.junit
 
 import com.gnefedev.javaee.model.TestStatus
-import org.junit.internal.runners.model.MultipleFailureException
+import org.junit.runners.model.MultipleFailureException
 import org.junit.runners.model.Statement
 import java.lang.reflect.Method
 
