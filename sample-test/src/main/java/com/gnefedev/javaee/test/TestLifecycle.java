@@ -15,7 +15,7 @@ import static org.junit.Assert.*;
 @Stateful
 @StatefulTimeout(5)
 @RunWith(JavaeeTestRunner.class)
-public class TestLifecycle {
+public class TestLifecycle extends TestLifecycleSuperClass {
     private static int beforeClassWasCalled = 0;
     private static int callsCount;
     private boolean beforeWasCalled = false;
@@ -48,6 +48,8 @@ public class TestLifecycle {
     @Test
     public void firstTest() {
         callsCount++;
+        assertTrue(beforeClassInSuperClass);
+        assertTrue(beforeInSuperClass);
         assertEquals(1, beforeClassWasCalled);
         assertTrue(beforeWasCalled);
         if (afterWasCalled) {

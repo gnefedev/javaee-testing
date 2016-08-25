@@ -6,7 +6,7 @@ import org.springframework.http.HttpEntity
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpMethod
 import org.springframework.http.client.SimpleClientHttpRequestFactory
-import org.springframework.web.client.HttpClientErrorException
+import org.springframework.web.client.ResourceAccessException
 import org.springframework.web.client.RestTemplate
 import java.lang.reflect.Method
 
@@ -41,7 +41,7 @@ internal object TestServer {
                             TestResponse::class.java
                     )
                     .body
-        } catch(e: HttpClientErrorException) {
+        } catch(e: ResourceAccessException) {
             throw RuntimeException("Не найден продеплоеный тест по адресу $uri")
         }
         SessionIdHolder.sessionId = testResult.sessionId

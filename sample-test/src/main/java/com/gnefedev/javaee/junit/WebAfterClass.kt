@@ -8,7 +8,7 @@ import java.lang.reflect.Method
 /**
  * Created by gerakln on 22.08.16.
  */
-class WebAfterClass(val base: Statement, val afterClass: Method) : Statement() {
+internal class WebAfterClass(val base: Statement, val afterClass: Method) : Statement() {
     override fun evaluate() {
         val errors: MutableList<Throwable> = mutableListOf()
         try {
