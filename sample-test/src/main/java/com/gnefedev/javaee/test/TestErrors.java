@@ -1,8 +1,11 @@
 package com.gnefedev.javaee.test;
 
 import com.gnefedev.javaee.junit.JavaeeTestRunner;
+import org.junit.AfterClass;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 
 import javax.ejb.Stateless;
 
@@ -13,14 +16,29 @@ import static org.junit.Assert.assertTrue;
  */
 @Stateless
 @RunWith(JavaeeTestRunner.class)
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TestErrors {
+    private static boolean throwExceptions = true;
+    @Test
+    public void _ifThisCalledTestWillNotFail() {
+        throwExceptions = false;
+    }
+    @AfterClass
+    public static void tearDown() {
+        throwExceptions = true;
+    }
+
     @Test
     public void assertFail() {
-        assertTrue("assertFail message", false);
+        if (throwExceptions) {
+            assertTrue("assertFail message", false);
+        }
     }
     @Test
     public void npe() {
-        String nullable = null;
-        nullable.length();
+        if (throwExceptions) {
+            String nullable = null;
+            nullable.length();
+        }
     }
 }

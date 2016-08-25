@@ -3,6 +3,7 @@ package com.gnefedev.javaee.test;
 import com.gnefedev.javaee.junit.JavaeeTestRunner;
 import org.junit.*;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 
 import javax.ejb.Stateful;
 import javax.ejb.StatefulTimeout;
@@ -15,10 +16,11 @@ import static org.junit.Assert.*;
 @Stateful
 @StatefulTimeout(5)
 @RunWith(JavaeeTestRunner.class)
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TestLifecycle extends TestLifecycleSuperClass {
     private static int beforeClassWasCalled = 0;
     private static int callsCount;
-    private boolean beforeWasCalled = false;
+    private static int beforeWasCalled = 0;
     private boolean afterWasCalled = false;
     private String lastExecutedMethod = null;
 
@@ -30,7 +32,7 @@ public class TestLifecycle extends TestLifecycleSuperClass {
 
     @Before
     public void setUp() {
-        beforeWasCalled = true;
+        beforeWasCalled++;
     }
 
     @After
@@ -51,10 +53,8 @@ public class TestLifecycle extends TestLifecycleSuperClass {
         assertTrue(beforeClassInSuperClass);
         assertTrue(beforeInSuperClass);
         assertEquals(1, beforeClassWasCalled);
-        assertTrue(beforeWasCalled);
-        if (afterWasCalled) {
-            assertEquals("secondTest", lastExecutedMethod);
-        }
+        assertEquals(1, beforeWasCalled);
+        assertNull(lastExecutedMethod);
         lastExecutedMethod = "firstTest";
     }
 
@@ -62,10 +62,9 @@ public class TestLifecycle extends TestLifecycleSuperClass {
     public void secondTest() {
         callsCount++;
         assertEquals(1, beforeClassWasCalled);
-        assertTrue(beforeWasCalled);
-        if (afterWasCalled) {
-            assertEquals("firstTest", lastExecutedMethod);
-        }
+        assertEquals(2, beforeWasCalled);
+        assertTrue(afterWasCalled);
+        assertEquals("firstTest", lastExecutedMethod);
         lastExecutedMethod = "secondTest";
     }
 }
