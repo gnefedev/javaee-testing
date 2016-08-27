@@ -23,15 +23,13 @@ internal object TestServer {
         restTemplate
     }
 
-    fun getResponse(javaMethod: Method, type: String): TestResponse<*> {
+    fun getResponse(javaMethod: Method, type: String, saveSession: Boolean = true): TestResponse<*> {
         val className = javaMethod.declaringClass.name
         val methodName = javaMethod.name
         val uri = "http://localhost:8080/test/$type/$className/$methodName"
         val testResult: TestResponse<*>
         val headers = HttpHeaders()
-        if (SessionIdHolder.sessionId != null) {
-            headers.add("Cookie", "JSESSIONID=" + SessionIdHolder.sessionId)
-        }
+        SessionIdHolder.addSessionHeader(headers)
         try {
             testResult = TestServer.template
                     .exchange(
@@ -44,7 +42,11 @@ internal object TestServer {
         } catch(e: ResourceAccessException) {
             throw RuntimeException("Не найден продеплоеный тест по адресу $uri")
         }
-        SessionIdHolder.sessionId = testResult.sessionId
+        if (saveSession) {
+            SessionIdHolder.sessionId = testResult.sessionId
+        } else {
+            SessionIdHolder.sessionId = null
+        }
         return testResult
     }
 }

@@ -24,7 +24,6 @@ class TestController {
             response = TestResponse(TestStatus.ERROR, failure.exception.cause?:failure.exception)
         }
         response.sessionId = httpSession.id
-        println(response.sessionId)
         return response
     }
     @RequestMapping("/after/{testClass}/{methodName}", produces = arrayOf(MediaType.APPLICATION_XML_VALUE))
@@ -38,6 +37,7 @@ class TestController {
             response = TestResponse(TestStatus.ERROR, e.cause!!)
         }
         response.sessionId = httpSession.id
+        httpSession.invalidate()
         return response
     }
 }

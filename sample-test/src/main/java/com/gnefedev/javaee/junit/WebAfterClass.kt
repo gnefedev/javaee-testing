@@ -16,7 +16,7 @@ internal class WebAfterClass(val base: Statement, val afterClass: Method) : Stat
         } catch (e: Throwable) {
             errors.add(e)
         } finally {
-            val testResult = TestServer.getResponse(afterClass, "after")
+            val testResult = TestServer.getResponse(afterClass, "after", true)
             if (testResult.status == TestStatus.ERROR) {
                 errors.add(testResult.error)
             }
