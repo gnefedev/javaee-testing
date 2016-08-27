@@ -16,7 +16,7 @@
     <dependencies>
         <dependency>
             <groupId>com.gnefedev</groupId>
-            <artifactId>sample-test</artifactId>
+            <artifactId>javaee-testing-web</artifactId>
             <type>war</type>
         </dependency>
         <dependency>
@@ -34,8 +34,8 @@
                     <modules>
                         <webModule>
                             <groupId>com.gnefedev</groupId>
-                            <artifactId>sample-test</artifactId>
-                            <bundleFileName>sample-test.war</bundleFileName>
+                            <artifactId>javaee-testing-web</artifactId>
+                            <bundleFileName>javaee-testing-web.war</bundleFileName>
                             <contextRoot>/test</contextRoot>
                         </webModule>
                         <ejbModule>

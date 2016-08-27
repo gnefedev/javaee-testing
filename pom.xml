@@ -11,7 +11,7 @@
     <modules>
         <module>sample-ejb</module>
         <module>sample-ear</module>
-        <module>sample-test</module>
+        <module>javaee-testing-web</module>
         <module>javaee-testing</module>
     </modules>
 
@@ -34,8 +34,8 @@
             </dependency>
             <dependency>
                 <groupId>com.gnefedev</groupId>
-                <artifactId>sample-test</artifactId>
-                <version>${sample.version}</version>
+                <artifactId>javaee-testing-web</artifactId>
+                <version>${javaee-testing.version}</version>
                 <type>war</type>
             </dependency>
             <dependency>

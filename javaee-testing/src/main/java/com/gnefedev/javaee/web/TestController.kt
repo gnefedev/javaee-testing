@@ -21,7 +21,7 @@ class TestController {
             response = TestResponse(TestStatus.SUCCESS, Throwable())
         } else {
             val failure = result.failures.first()
-            response = TestResponse(TestStatus.ERROR, failure.exception.cause?:failure.exception)
+            response = TestResponse(TestStatus.ERROR, failure.exception.cause ?: failure.exception)
         }
         response.sessionId = httpSession.id
         return response

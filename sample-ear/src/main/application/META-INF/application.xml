@@ -6,7 +6,7 @@
   <display-name>sample-ear</display-name>
   <module>
     <web>
-      <web-uri>sample-test.war</web-uri>
+      <web-uri>javaee-testing-web.war</web-uri>
       <context-root>/test</context-root>
     </web>
   </module>
