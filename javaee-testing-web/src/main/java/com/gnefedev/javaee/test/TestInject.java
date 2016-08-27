@@ -1,7 +1,7 @@
 package com.gnefedev.javaee.test;
 
 import com.gnefedev.javaee.junit.JavaeeTestRunner;
-import com.gnefedev.sample.HelloWorld;
+import com.gnefedev.sample.StatelessExample;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -17,10 +17,10 @@ import static org.junit.Assert.assertEquals;
 @RunWith(JavaeeTestRunner.class)
 public class TestInject {
     @Inject
-    private HelloWorld fromEjb;
+    private StatelessExample stateless;
 
     @Test
     public void online() {
-        assertEquals("Hello, World!!!", fromEjb.getGreetings());
+        assertEquals("Hello, World!!!", stateless.getGreetings());
     }
 }
