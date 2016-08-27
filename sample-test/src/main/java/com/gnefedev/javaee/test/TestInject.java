@@ -1,7 +1,7 @@
 package com.gnefedev.javaee.test;
 
 import com.gnefedev.javaee.junit.JavaeeTestRunner;
-import com.gnefedev.sample.FromCore;
+import com.gnefedev.sample.HelloWorld;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -17,15 +17,10 @@ import static org.junit.Assert.assertEquals;
 @RunWith(JavaeeTestRunner.class)
 public class TestInject {
     @Inject
-    private FromCore fromCore;
-
-    @Test
-    public void offline() {
-        assertEquals("Hello, World!!!", new FromCore().getGreetings());
-    }
+    private HelloWorld fromEjb;
 
     @Test
     public void online() {
-        assertEquals("Hello, World!!!", fromCore.getGreetings());
+        assertEquals("Hello, World!!!", fromEjb.getGreetings());
     }
 }

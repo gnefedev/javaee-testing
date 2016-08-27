@@ -9,7 +9,6 @@
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <modules>
-        <module>sample-core</module>
         <module>sample-ejb</module>
         <module>sample-ear</module>
         <module>sample-test</module>
@@ -35,11 +34,6 @@
             </dependency>
             <dependency>
                 <groupId>com.gnefedev</groupId>
-                <artifactId>sample-core</artifactId>
-                <version>${sample.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.gnefedev</groupId>
                 <artifactId>sample-test</artifactId>
                 <version>${sample.version}</version>
                 <type>war</type>
@@ -55,6 +49,7 @@
                 <groupId>javax</groupId>
                 <artifactId>javaee-api</artifactId>
                 <version>7.0</version>
+                <scope>provided</scope>
             </dependency>
             <dependency>
                 <groupId>junit</groupId>

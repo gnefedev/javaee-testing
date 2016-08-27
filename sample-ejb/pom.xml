@@ -14,12 +14,9 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.gnefedev</groupId>
-            <artifactId>sample-core</artifactId>
-        </dependency>
-        <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-api</artifactId>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 

@@ -1,13 +1,13 @@
 package com.gnefedev.sample;
 
-import javax.ejb.MessageDriven;
-import javax.inject.Inject;
+import javax.ejb.Stateless;
 
 /**
  * Created by gerakln on 31.07.16.
  */
-@MessageDriven
+@Stateless
 public class HelloWorld {
-    @Inject
-    private FromCore fromCore;
+    public String getGreetings() {
+        return "Hello, World!!!";
+    }
 }

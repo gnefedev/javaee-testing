@@ -16,14 +16,17 @@
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.gnefedev</groupId>
-            <artifactId>sample-core</artifactId>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.gnefedev</groupId>
             <artifactId>javaee-testing</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.gnefedev</groupId>
+            <artifactId>sample-ejb</artifactId>
+            <type>ejb</type>
         </dependency>
 
         <dependency>
