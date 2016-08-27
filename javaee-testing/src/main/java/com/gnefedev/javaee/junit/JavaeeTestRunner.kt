@@ -1,95 +1,59 @@
 package com.gnefedev.javaee.junit
 
-import com.gnefedev.javaee.web.ContextHolder
-import com.gnefedev.javaee.web.SessionRegister
-import org.junit.AfterClass
 import org.junit.runners.BlockJUnit4ClassRunner
 import org.junit.runners.model.FrameworkMethod
-import org.junit.runners.model.InitializationError
 import org.junit.runners.model.Statement
 import javax.naming.InitialContext
 
 /**
  * Created by gerakln on 14.08.16.
  */
-class JavaeeTestRunner @Throws(InitializationError::class)
-constructor(private val klass: Class<*>) : BlockJUnit4ClassRunner(klass) {
-    fun sessionRegister(): SessionRegister {
-        return ContextHolder.getBean(SessionRegister::class.java)
+class JavaeeTestRunner (klass: Class<*>) : BlockJUnit4ClassRunner(klass) {
+    private val delegate: RunnerDelegate
+
+    init {
+        if (inServer) {
+            delegate = OnlineRunner(klass)
+        } else {
+            delegate = AgainstServerRunner(klass)
+        }
     }
 
     @Throws(Exception::class)
     override fun createTest(): Any {
-        if (inServer) {
-            return sessionRegister().getEjb(klass)
-        } else {
-            return super.createTest()
-        }
+        return delegate.createTest()
     }
 
     override fun methodInvoker(method: FrameworkMethod?, test: Any?): Statement {
-        if (inServer) {
-            return super.methodInvoker(method, test)
-        } else {
-            return WebMethodInvoker(method!!)
-        }
-    }
-
-    override fun methodBlock(method: FrameworkMethod?): Statement {
-        val methodBlock = super.methodBlock(method)
-        return methodBlock
+        return delegate.methodInvoker(method, test)
     }
 
     override fun withBeforeClasses(statement: Statement?): Statement {
-        if (inServer && sessionRegister().isFirstCall(klass)) {
-            sessionRegister().registerCall(klass)
-            return super.withBeforeClasses(statement)
-        } else {
-            return statement!!
-        }
+        return delegate.withBeforeClasses(statement)
     }
 
     override fun withBefores(method: FrameworkMethod?, target: Any?, statement: Statement?): Statement {
-        if (inServer) {
-            return super.withBefores(method, target, statement)
-        } else {
-            return statement!!
-        }
+        return delegate.withBefores(method, target, statement)
     }
 
     override fun withAfterClasses(statement: Statement?): Statement {
-        if (inServer) {
-            return statement!!
-        } else {
-            val afterMethods = testClass.getAnnotatedMethods(AfterClass::class.java)
-            if (afterMethods.isEmpty()) {
-                return statement!!
-            } else {
-                return WebAfterClass(statement!!, afterMethods.first().method)
-            }
-        }
+        return delegate.withAfterClasses(statement)
     }
 
     override fun withAfters(method: FrameworkMethod?, target: Any?, statement: Statement?): Statement {
-        if (inServer) {
-            return super.withAfters(method, target, statement)
-        } else {
-            return statement!!
-        }
+        return delegate.withAfters(method, target, statement)
     }
 
     companion object {
-        private val initialContext: InitialContext? by lazy {
+        private val inServer: Boolean by lazy {
             val context: InitialContext?
             try {
                 context = InitialContext()
                 context.environment
             } catch(e: Exception) {
-                context = null
+                return@lazy false
             }
-            context
+            return@lazy true
         }
-
-        private val inServer = initialContext != null
     }
 }

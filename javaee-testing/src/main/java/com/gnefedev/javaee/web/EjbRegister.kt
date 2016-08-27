@@ -9,7 +9,7 @@ import javax.naming.InitialContext
  */
 @Component
 @Scope("session")
-class SessionRegister {
+class EjbRegister {
     private val ejbs: MutableMap<Class<*>, Any> = mutableMapOf()
     private val wasCalled: MutableMap<Class<*>, Boolean> = mutableMapOf()
 

@@ -1,7 +1,6 @@
 package com.gnefedev.javaee.junit
 
 import com.gnefedev.javaee.model.TestResponse
-import com.gnefedev.javaee.web.SessionIdHolder
 import org.springframework.http.HttpEntity
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpMethod
@@ -14,6 +13,13 @@ import java.lang.reflect.Method
  * Created by gerakln on 21.08.16.
  */
 internal object TestServer {
+    private var sessionId: String? = null
+    private fun addSessionHeader(headers: HttpHeaders) {
+        if (sessionId != null) {
+            headers.add("Cookie", "JSESSIONID=" + sessionId)
+        }
+    }
+
     private val template : RestTemplate by lazy {
         val requestFactory = SimpleClientHttpRequestFactory()
         requestFactory.setConnectTimeout(500)
@@ -29,7 +35,7 @@ internal object TestServer {
         val uri = "http://localhost:8080/test/$type/$className/$methodName"
         val testResult: TestResponse<*>
         val headers = HttpHeaders()
-        SessionIdHolder.addSessionHeader(headers)
+        addSessionHeader(headers)
         try {
             testResult = TestServer.template
                     .exchange(
@@ -43,9 +49,9 @@ internal object TestServer {
             throw RuntimeException("Не найден продеплоеный тест по адресу $uri")
         }
         if (saveSession) {
-            SessionIdHolder.sessionId = testResult.sessionId
+            sessionId = testResult.sessionId
         } else {
-            SessionIdHolder.sessionId = null
+            sessionId = null
         }
         return testResult
     }
