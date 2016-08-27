@@ -23,6 +23,7 @@
         <java-version>1.7</java-version>
         <spring.version>4.2.2.RELEASE</spring.version>
         <jackson.version>2.6.3</jackson.version>
+        <kotlin.version>1.0.3</kotlin.version>
     </properties>
 
     <dependencyManagement>
@@ -71,6 +72,11 @@
                 <artifactId>spring-oxm</artifactId>
                 <version>${spring.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-stdlib</artifactId>
+                <version>${kotlin.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -110,6 +116,43 @@
                 <plugin>
                     <artifactId>maven-ejb-plugin</artifactId>
                     <version>2.5.1</version>
+                    <configuration>
+                        <archive>
+                            <addClasspath>false</addClasspath>
+                        </archive>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.jetbrains.kotlin</groupId>
+                    <artifactId>kotlin-maven-plugin</artifactId>
+                    <version>${kotlin.version}</version>
+                    <executions>
+                        <execution>
+                            <id>compile</id>
+                            <phase>process-sources</phase>
+                            <goals>
+                                <goal>compile</goal>
+                            </goals>
+                            <configuration>
+                                <sourceDirs>
+                                    <source>src/main/java</source>
+                                </sourceDirs>
+                            </configuration>
+                        </execution>
+                        <execution>
+                            <id>test-compile</id>
+                            <phase>process-test-sources</phase>
+                            <goals>
+                                <goal>test-compile</goal>
+                            </goals>
+                            <configuration>
+                                <sourceDirs>
+                                    <source>target/generated-test-sources/test-annotations</source>
+                                    <source>src/test/java</source>
+                                </sourceDirs>
+                            </configuration>
+                        </execution>
+                    </executions>
                 </plugin>
             </plugins>
         </pluginManagement>

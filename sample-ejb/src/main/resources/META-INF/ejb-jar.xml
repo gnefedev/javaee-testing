@@ -3,14 +3,4 @@
 2.0//EN' 'http://java.sun.com/dtd/ejb-jar_2_0.dtd'>
 <ejb-jar>
     <display-name>sample ejb</display-name>
-    <!--<enterprise-beans>-->
-        <!--<message-driven>-->
-            <!--<ejb-name>MDB</ejb-name>-->
-            <!--<ejb-class>com.gnefedev.sample.HelloWorld</ejb-class>-->
-            <!--<transaction-type>Container</transaction-type>-->
-            <!--<message-driven-destination>-->
-                <!--<destination-type>javax.jms.Queue</destination-type>-->
-            <!--</message-driven-destination>-->
-        <!--</message-driven>-->
-    <!--</enterprise-beans>-->
 </ejb-jar>
