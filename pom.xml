@@ -10,14 +10,15 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>sample-core</module>
-        <module>sample-war</module>
         <module>sample-ejb</module>
         <module>sample-ear</module>
         <module>sample-test</module>
+        <module>javaee-testing</module>
     </modules>
 
     <properties>
         <sample.version>1.0-SNAPSHOT</sample.version>
+        <javaee-testing.version>1.0-SNAPSHOT</javaee-testing.version>
         <encoding>UTF-8</encoding>
         <java-version>1.7</java-version>
         <spring.version>4.2.2.RELEASE</spring.version>
@@ -28,14 +29,13 @@
         <dependencies>
             <dependency>
                 <groupId>com.gnefedev</groupId>
-                <artifactId>sample-core</artifactId>
-                <version>${sample.version}</version>
+                <artifactId>javaee-testing</artifactId>
+                <version>${javaee-testing.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.gnefedev</groupId>
-                <artifactId>sample-war</artifactId>
+                <artifactId>sample-core</artifactId>
                 <version>${sample.version}</version>
-                <type>war</type>
             </dependency>
             <dependency>
                 <groupId>com.gnefedev</groupId>
