@@ -1,4 +1,4 @@
-package com.gnefedev.javaee.junit
+package com.gnefedev.javaee.against.server
 
 import com.gnefedev.javaee.model.TestResponse
 import org.springframework.http.HttpEntity
@@ -37,7 +37,7 @@ internal object TestServer {
         val headers = HttpHeaders()
         addSessionHeader(headers)
         try {
-            testResult = TestServer.template
+            testResult = template
                     .exchange(
                             uri,
                             HttpMethod.GET,

@@ -1,5 +1,6 @@
-package com.gnefedev.javaee.junit
+package com.gnefedev.javaee.against.server
 
+import com.gnefedev.javaee.junit.RunnerDelegate
 import org.junit.AfterClass
 import org.junit.runners.model.FrameworkMethod
 import org.junit.runners.model.Statement
@@ -7,7 +8,7 @@ import org.junit.runners.model.Statement
 /**
  * Created by gerakln on 14.08.16.
  */
-internal class AgainstServerRunner(private val klass: Class<*>) : RunnerDelegate(klass) {
+internal class AgainstServerRunner(klass: Class<*>) : RunnerDelegate(klass) {
     override fun methodInvoker(method: FrameworkMethod?, test: Any?): Statement {
         return WebMethodInvoker(method!!)
     }

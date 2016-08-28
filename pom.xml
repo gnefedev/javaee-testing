@@ -111,11 +111,6 @@
                 <plugin>
                     <artifactId>maven-ejb-plugin</artifactId>
                     <version>2.5.1</version>
-                    <configuration>
-                        <archive>
-                            <addClasspath>false</addClasspath>
-                        </archive>
-                    </configuration>
                 </plugin>
                 <plugin>
                     <groupId>org.jetbrains.kotlin</groupId>

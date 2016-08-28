@@ -1,4 +1,4 @@
-package com.gnefedev.javaee.web
+package com.gnefedev.javaee.online
 
 import org.springframework.context.ApplicationContext
 import org.springframework.context.ApplicationContextAware

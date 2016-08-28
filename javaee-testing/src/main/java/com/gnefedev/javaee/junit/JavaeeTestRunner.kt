@@ -1,5 +1,7 @@
 package com.gnefedev.javaee.junit
 
+import com.gnefedev.javaee.against.server.AgainstServerRunner
+import com.gnefedev.javaee.online.OnlineRunner
 import org.junit.runners.BlockJUnit4ClassRunner
 import org.junit.runners.model.FrameworkMethod
 import org.junit.runners.model.Statement
@@ -46,10 +48,8 @@ class JavaeeTestRunner (klass: Class<*>) : BlockJUnit4ClassRunner(klass) {
 
     companion object {
         private val inServer: Boolean by lazy {
-            val context: InitialContext?
             try {
-                context = InitialContext()
-                context.environment
+                InitialContext().environment
             } catch(e: Exception) {
                 return@lazy false
             }

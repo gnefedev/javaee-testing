@@ -1,4 +1,4 @@
-package com.gnefedev.javaee.junit
+package com.gnefedev.javaee.against.server
 
 import com.gnefedev.javaee.model.TestStatus
 import org.junit.runners.model.FrameworkMethod

@@ -1,4 +1,4 @@
-package com.gnefedev.javaee.config
+package com.gnefedev.javaee.online
 
 import org.springframework.web.WebApplicationInitializer
 import org.springframework.web.context.ContextLoaderListener
@@ -16,7 +16,7 @@ class WebInit : WebApplicationInitializer {
         val context = AnnotationConfigWebApplicationContext()
         context.register(WebConfig::class.java)
         servletContext.addListener(ContextLoaderListener(context))
-        val dispatcher = servletContext.addServlet("dispatcher", DispatcherServlet(context))
+        val dispatcher = servletContext.addServlet("onlineTestServlet", DispatcherServlet(context))
         dispatcher.setLoadOnStartup(1)
         dispatcher.addMapping("/*")
     }

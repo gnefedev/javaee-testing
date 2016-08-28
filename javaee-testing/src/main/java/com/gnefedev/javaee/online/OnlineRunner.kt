@@ -1,7 +1,8 @@
-package com.gnefedev.javaee.junit
+package com.gnefedev.javaee.online
 
-import com.gnefedev.javaee.web.ContextHolder
-import com.gnefedev.javaee.web.EjbRegister
+import com.gnefedev.javaee.junit.RunnerDelegate
+import com.gnefedev.javaee.online.ContextHolder
+import com.gnefedev.javaee.online.EjbRegister
 import org.junit.runners.BlockJUnit4ClassRunner
 import org.junit.runners.model.FrameworkMethod
 import org.junit.runners.model.Statement

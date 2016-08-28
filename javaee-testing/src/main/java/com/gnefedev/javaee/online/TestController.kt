@@ -1,4 +1,4 @@
-package com.gnefedev.javaee.web
+package com.gnefedev.javaee.online
 
 import com.gnefedev.javaee.model.TestResponse
 import com.gnefedev.javaee.model.TestStatus

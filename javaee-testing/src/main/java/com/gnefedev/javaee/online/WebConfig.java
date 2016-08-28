@@ -1,6 +1,5 @@
-package com.gnefedev.javaee.config;
+package com.gnefedev.javaee.online;
 
-import com.gnefedev.javaee.web.TestController;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -10,6 +9,6 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
  */
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackageClasses = TestController.class)
+@ComponentScan
 public class WebConfig {
 }
