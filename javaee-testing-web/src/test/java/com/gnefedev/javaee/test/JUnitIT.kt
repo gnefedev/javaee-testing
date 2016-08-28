@@ -11,7 +11,7 @@ import org.junit.runner.manipulation.Filter
 /**
  * Created by gerakln on 14.08.16.
  */
-class TestJUnit {
+class JUnitIT {
     @Test
     fun testInject() {
         val junit = JUnitCore()

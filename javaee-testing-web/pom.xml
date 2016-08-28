@@ -29,4 +29,72 @@
             <type>ejb</type>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-war-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>WildflyTest</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-failsafe-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>integration-test</goal>
+                                    <goal>verify</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.wildfly.plugins</groupId>
+                        <artifactId>wildfly-maven-plugin</artifactId>
+                        <configuration>
+                            <filename>sample-ear-1.0-SNAPSHOT.ear</filename>
+                            <targetDir>${basedir}/../sample-ear/target</targetDir>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>start</id>
+                                <phase>pre-integration-test</phase>
+                                <goals>
+                                    <goal>start</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>undeploy</id>
+                                <phase>pre-integration-test</phase>
+                                <goals>
+                                    <goal>undeploy</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>deploy</id>
+                                <phase>pre-integration-test</phase>
+                                <goals>
+                                    <goal>deploy</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>stop</id>
+                                <phase>post-integration-test</phase>
+                                <goals>
+                                    <goal>shutdown</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>
