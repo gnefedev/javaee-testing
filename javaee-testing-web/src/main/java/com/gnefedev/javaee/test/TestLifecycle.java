@@ -5,30 +5,31 @@ import org.junit.*;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 
-import javax.ejb.Stateful;
-import javax.ejb.StatefulTimeout;
+import javax.ejb.Stateless;
 
 import static org.junit.Assert.*;
 
 /**
  * Created by gerakln on 21.08.16.
  */
-@Stateful
-@StatefulTimeout(5)
+@Stateless
 @RunWith(JavaeeTestRunner.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TestLifecycle extends TestLifecycleSuperClass {
     private static int beforeClassWasCalled = 0;
     private static int callsCount;
-    private static int beforeWasCalled = 0;
-    private boolean afterWasCalled = false;
-    private String lastExecutedMethod = null;
+    private static int beforeWasCalled;
+    private static boolean afterWasCalled;
+    private static String lastExecutedMethod;
 
     @BeforeClass
     public static void beforeClass() {
-        beforeClassWasCalled++;
-        beforeWasCalled = 0;
         callsCount = 0;
+        beforeWasCalled = 0;
+        afterWasCalled = false;
+        lastExecutedMethod = null;
+
+        beforeClassWasCalled++;
     }
 
     @Before
