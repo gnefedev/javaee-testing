@@ -16,17 +16,21 @@ public class TestsFilter extends AbstractTypeHierarchyTraversingFilter {
     @Override
     protected boolean matchSelf(MetadataReader metadataReader) {
         try {
-            Class<?> candidate = Class.forName(metadataReader.getClassMetadata().getClassName());
-            if (!candidate.isAnnotationPresent(RunWith.class)) {
-                return false;
-            } else {
-                return candidate
-                        .getAnnotation(RunWith.class)
-                        .value()
-                        .equals(JavaeeTestRunner.class);
-            }
+            return isTestClass(metadataReader.getClassMetadata().getClassName());
         } catch (ClassNotFoundException e) {
             return false;
+        }
+    }
+
+    private boolean isTestClass(String className) throws ClassNotFoundException {
+        Class<?> candidate = Class.forName(className);
+        if (!candidate.isAnnotationPresent(RunWith.class)) {
+            return false;
+        } else {
+            return candidate
+                    .getAnnotation(RunWith.class)
+                    .value()
+                    .equals(JavaeeTestRunner.class);
         }
     }
 }

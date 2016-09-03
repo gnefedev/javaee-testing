@@ -1,9 +1,11 @@
 package com.gnefedev.javaee.offline
 
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory
+import org.springframework.beans.factory.config.CustomScopeConfigurer
 import org.springframework.beans.factory.support.BeanDefinitionBuilder
 import org.springframework.beans.factory.support.BeanDefinitionRegistry
 import org.springframework.beans.factory.support.BeanDefinitionRegistryPostProcessor
+import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider
 import org.springframework.context.annotation.Configuration
 import org.springframework.core.type.filter.AnnotationTypeFilter
@@ -16,16 +18,26 @@ import javax.ejb.Stateless
 @Configuration
 open class OfflineConfig : BeanDefinitionRegistryPostProcessor {
 
+    @Bean
+    open fun testScope() : CustomScopeConfigurer {
+        return CustomScopeConfigurer()
+                .apply { addScope("test", TestScope) }
+    }
+
     override fun postProcessBeanDefinitionRegistry(registry: BeanDefinitionRegistry) {
         val scanner = ClassPathScanningCandidateComponentProvider(false)
         scanner.addIncludeFilter(TestsFilter())
         scanner.addIncludeFilter(AnnotationTypeFilter(Stateless::class.java))
         scanner.addIncludeFilter(AnnotationTypeFilter(Stateful::class.java))
         for (candidate in scanner.findCandidateComponents("com.gnefedev")) {
-            val definition = BeanDefinitionBuilder
-                    .genericBeanDefinition(candidate.beanClassName)
-                    .beanDefinition
-            registry.registerBeanDefinition(candidate.beanClassName, definition)
+            val builder = BeanDefinitionBuilder.genericBeanDefinition(candidate.beanClassName)
+            if (Class.forName(candidate.beanClassName).isAnnotationPresent(Stateful::class.java)) {
+                builder.setScope("test")
+            }
+            registry.registerBeanDefinition(
+                    candidate.beanClassName,
+                    builder.beanDefinition
+            )
         }
     }
 
