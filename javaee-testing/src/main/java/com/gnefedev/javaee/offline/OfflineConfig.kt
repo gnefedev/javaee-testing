@@ -16,7 +16,7 @@ import javax.ejb.Stateless
  * Created by gerakln on 03.09.16.
  */
 @Configuration
-open class OfflineConfig : BeanDefinitionRegistryPostProcessor {
+internal open class OfflineConfig : BeanDefinitionRegistryPostProcessor {
 
     @Bean
     open fun testScope() : CustomScopeConfigurer {
@@ -30,12 +30,15 @@ open class OfflineConfig : BeanDefinitionRegistryPostProcessor {
         scanner.addIncludeFilter(AnnotationTypeFilter(Stateless::class.java))
         scanner.addIncludeFilter(AnnotationTypeFilter(Stateful::class.java))
         for (candidate in scanner.findCandidateComponents("com.gnefedev")) {
-            val builder = BeanDefinitionBuilder.genericBeanDefinition(candidate.beanClassName)
-            if (Class.forName(candidate.beanClassName).isAnnotationPresent(Stateful::class.java)) {
+            val candidateClass = Class.forName(candidate.beanClassName)
+            val builder = BeanDefinitionBuilder.genericBeanDefinition(candidateClass)
+            if (candidateClass.isAnnotationPresent(Stateful::class.java)) {
                 builder.setScope("test")
+            } else if (TestsFilter.isTestClass(candidateClass)) {
+                builder.setScope("prototype")
             }
             registry.registerBeanDefinition(
-                    candidate.beanClassName,
+                    candidateClass.name,
                     builder.beanDefinition
             )
         }

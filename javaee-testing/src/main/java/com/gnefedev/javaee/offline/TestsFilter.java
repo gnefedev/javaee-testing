@@ -8,7 +8,7 @@ import org.springframework.core.type.filter.AbstractTypeHierarchyTraversingFilte
 /**
  * Created by gerakln on 03.09.16.
  */
-public class TestsFilter extends AbstractTypeHierarchyTraversingFilter {
+class TestsFilter extends AbstractTypeHierarchyTraversingFilter {
     TestsFilter() {
         super(false, false);
     }
@@ -16,18 +16,18 @@ public class TestsFilter extends AbstractTypeHierarchyTraversingFilter {
     @Override
     protected boolean matchSelf(MetadataReader metadataReader) {
         try {
-            return isTestClass(metadataReader.getClassMetadata().getClassName());
+            String className = metadataReader.getClassMetadata().getClassName();
+            return isTestClass(Class.forName(className));
         } catch (ClassNotFoundException e) {
             return false;
         }
     }
 
-    private boolean isTestClass(String className) throws ClassNotFoundException {
-        Class<?> candidate = Class.forName(className);
-        if (!candidate.isAnnotationPresent(RunWith.class)) {
+    static boolean isTestClass(Class<?> candidateClass) throws ClassNotFoundException {
+        if (!candidateClass.isAnnotationPresent(RunWith.class)) {
             return false;
         } else {
-            return candidate
+            return candidateClass
                     .getAnnotation(RunWith.class)
                     .value()
                     .equals(JavaeeTestRunner.class);

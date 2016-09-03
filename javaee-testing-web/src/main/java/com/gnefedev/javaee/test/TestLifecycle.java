@@ -21,6 +21,7 @@ public class TestLifecycle extends TestLifecycleSuperClass {
     private static int beforeWasCalled;
     private static boolean afterWasCalled;
     private static String lastExecutedMethod;
+    private String shouldNotSaved = null;
 
     @BeforeClass
     public static void beforeClass() {
@@ -52,6 +53,9 @@ public class TestLifecycle extends TestLifecycleSuperClass {
     @Test
     public void firstTest() {
         callsCount++;
+        assertNull(shouldNotSaved);
+        shouldNotSaved = "firstTest";
+
         assertTrue(beforeClassInSuperClass);
         assertTrue(beforeInSuperClass);
         assertEquals(1, beforeClassWasCalled);
@@ -63,6 +67,9 @@ public class TestLifecycle extends TestLifecycleSuperClass {
     @Test
     public void secondTest() {
         callsCount++;
+        assertNull(shouldNotSaved);
+        shouldNotSaved = "secondTest";
+
         assertEquals(1, beforeClassWasCalled);
         assertEquals(2, beforeWasCalled);
         assertTrue(afterWasCalled);

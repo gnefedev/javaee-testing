@@ -7,7 +7,7 @@ import org.springframework.beans.factory.config.Scope
 /**
  * Created by gerakln on 03.09.16.
  */
-object TestScope : Scope {
+internal object TestScope : Scope {
     private val objectMap: MutableMap<String, Any> = mutableMapOf()
 
     override fun resolveContextualObject(key: String?): Any? {
