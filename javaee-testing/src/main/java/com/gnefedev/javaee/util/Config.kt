@@ -20,7 +20,7 @@ object Config {
 
     val host: String = properties.getProperty("host", "localhost")
     val port: Int = properties.getProperty("port", "8080").toInt()
-    val contextRoot: Int = properties.getProperty("context-root", "test").toInt()
+    val contextRoot: String = properties.getProperty("context-root", "test")
 
     val testMode: TestMode by lazy { testMode() }
 

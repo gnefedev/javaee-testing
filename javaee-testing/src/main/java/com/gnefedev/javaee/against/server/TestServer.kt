@@ -40,14 +40,18 @@ object TestServer {
         val testResult: TestResponse<*>
         val headers = HttpHeaders()
         addSessionHeader(headers)
-        testResult = template
-                .exchange(
-                        uri,
-                        HttpMethod.GET,
-                        HttpEntity(null, headers),
-                        TestResponse::class.java
-                )
-                .body
+        try {
+            testResult = template
+                    .exchange(
+                            uri,
+                            HttpMethod.GET,
+                            HttpEntity(null, headers),
+                            TestResponse::class.java
+                    )
+                    .body
+        } catch(e: RestClientException) {
+            throw RuntimeException("Не найден продеплоеный тест по адресу $uri")
+        }
         if (saveSession) {
             sessionId = testResult.sessionId
         } else {
