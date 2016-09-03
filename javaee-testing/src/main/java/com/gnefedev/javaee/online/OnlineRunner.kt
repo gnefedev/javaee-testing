@@ -1,7 +1,6 @@
 package com.gnefedev.javaee.online
 
 import com.gnefedev.javaee.junit.RunnerDelegate
-import org.junit.runners.model.FrameworkMethod
 import org.junit.runners.model.Statement
 
 /**
@@ -28,9 +27,5 @@ class OnlineRunner(private val klass: Class<*>) : RunnerDelegate(klass) {
 
     override fun withAfterClasses(statement: Statement?): Statement {
         return statement!!
-    }
-
-    override fun withAfters(method: FrameworkMethod?, target: Any?, statement: Statement?): Statement {
-        return super.withAfters(method, target, statement)
     }
 }

@@ -7,6 +7,6 @@ import com.gnefedev.javaee.junit.RunnerDelegate
  */
 class OfflineRunner(private val klass: Class<*>) : RunnerDelegate(klass) {
     override fun createTest(): Any {
-        throw NotImplementedError()
+        return ContextHolder.context.getBean(klass)
     }
 }
