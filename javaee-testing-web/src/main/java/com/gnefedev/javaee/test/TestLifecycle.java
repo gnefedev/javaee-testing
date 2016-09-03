@@ -27,6 +27,7 @@ public class TestLifecycle extends TestLifecycleSuperClass {
     @BeforeClass
     public static void beforeClass() {
         beforeClassWasCalled++;
+        beforeWasCalled = 0;
         callsCount = 0;
     }
 

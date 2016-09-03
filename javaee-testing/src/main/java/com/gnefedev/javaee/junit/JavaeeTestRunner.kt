@@ -1,11 +1,13 @@
 package com.gnefedev.javaee.junit
 
 import com.gnefedev.javaee.against.server.AgainstServerRunner
+import com.gnefedev.javaee.model.TestMode.*
+import com.gnefedev.javaee.offline.OfflineRunner
 import com.gnefedev.javaee.online.OnlineRunner
+import com.gnefedev.javaee.util.Config
 import org.junit.runners.BlockJUnit4ClassRunner
 import org.junit.runners.model.FrameworkMethod
 import org.junit.runners.model.Statement
-import javax.naming.InitialContext
 
 /**
  * Created by gerakln on 14.08.16.
@@ -14,10 +16,10 @@ class JavaeeTestRunner (klass: Class<*>) : BlockJUnit4ClassRunner(klass) {
     private val delegate: RunnerDelegate
 
     init {
-        if (inServer) {
-            delegate = OnlineRunner(klass)
-        } else {
-            delegate = AgainstServerRunner(klass)
+        when (Config.testMode) {
+            OFFLINE -> delegate = OfflineRunner(klass)
+            ONLINE -> delegate = OnlineRunner(klass)
+            AGAINST_SERVER -> delegate = AgainstServerRunner(klass)
         }
     }
 
@@ -44,16 +46,5 @@ class JavaeeTestRunner (klass: Class<*>) : BlockJUnit4ClassRunner(klass) {
 
     override fun withAfters(method: FrameworkMethod?, target: Any?, statement: Statement?): Statement {
         return delegate.withAfters(method, target, statement)
-    }
-
-    companion object {
-        private val inServer: Boolean by lazy {
-            try {
-                InitialContext().environment
-            } catch(e: Exception) {
-                return@lazy false
-            }
-            return@lazy true
-        }
     }
 }

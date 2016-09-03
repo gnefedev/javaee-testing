@@ -26,6 +26,7 @@ class TestController {
         response.sessionId = httpSession.id
         return response
     }
+
     @RequestMapping("/after/{testClass}/{methodName}", produces = arrayOf(MediaType.APPLICATION_XML_VALUE))
     fun runAfterClass(@PathVariable testClass: Class<*>, @PathVariable methodName: String, httpSession: HttpSession): TestResponse<*> {
         val afterMethod = testClass.getDeclaredMethod(methodName)
@@ -39,5 +40,10 @@ class TestController {
         response.sessionId = httpSession.id
         httpSession.invalidate()
         return response
+    }
+
+    @RequestMapping("/pong")
+    fun pong() : String {
+        return "pong"
     }
 }
