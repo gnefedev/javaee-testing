@@ -2,7 +2,6 @@ package com.gnefedev.javaee.offline
 
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory
 import org.springframework.beans.factory.config.CustomScopeConfigurer
-import org.springframework.beans.factory.support.BeanDefinitionBuilder
 import org.springframework.beans.factory.support.BeanDefinitionRegistry
 import org.springframework.beans.factory.support.BeanDefinitionRegistryPostProcessor
 import org.springframework.context.annotation.Bean
@@ -29,18 +28,14 @@ internal open class OfflineConfig : BeanDefinitionRegistryPostProcessor {
         scanner.addIncludeFilter(TestsFilter())
         scanner.addIncludeFilter(AnnotationTypeFilter(Stateless::class.java))
         scanner.addIncludeFilter(AnnotationTypeFilter(Stateful::class.java))
-        for (candidate in scanner.findCandidateComponents("com.gnefedev")) {
-            val candidateClass = Class.forName(candidate.beanClassName)
-            val builder = BeanDefinitionBuilder.genericBeanDefinition(candidateClass)
+        for (definition in scanner.findCandidateComponents("com.gnefedev")) {
+            val candidateClass = Class.forName(definition.beanClassName)
             if (candidateClass.isAnnotationPresent(Stateful::class.java)) {
-                builder.setScope("test")
+                definition.scope = "test"
             } else if (TestsFilter.isTestClass(candidateClass)) {
-                builder.setScope("prototype")
+                definition.scope = "prototype"
             }
-            registry.registerBeanDefinition(
-                    candidateClass.name,
-                    builder.beanDefinition
-            )
+            registry.registerBeanDefinition(candidateClass.name, definition)
         }
     }
 
