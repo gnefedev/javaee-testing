@@ -32,7 +32,7 @@ internal open class OfflineConfig : BeanDefinitionRegistryPostProcessor {
             val candidateClass = Class.forName(definition.beanClassName)
             if (candidateClass.isAnnotationPresent(Stateful::class.java)) {
                 definition.scope = "test"
-            } else if (TestsFilter.isTestClass(candidateClass)) {
+            } else if (TestsFilter.isTestClass(candidateClass) || candidateClass.isAnnotationPresent(Stateless::class.java)) {
                 definition.scope = "prototype"
             }
             registry.registerBeanDefinition(candidateClass.name, definition)
