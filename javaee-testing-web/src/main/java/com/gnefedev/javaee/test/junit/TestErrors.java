@@ -6,14 +6,16 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 
-import javax.ejb.Stateless;
+import javax.ejb.Stateful;
+import javax.enterprise.context.RequestScoped;
 
 import static org.junit.Assert.assertTrue;
 
 /**
  * Created by gerakln on 21.08.16.
  */
-@Stateless
+@RequestScoped
+@Stateful
 @RunWith(JavaeeTestRunner.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TestErrors {
