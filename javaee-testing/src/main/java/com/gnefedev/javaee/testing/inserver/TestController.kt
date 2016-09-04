@@ -38,7 +38,6 @@ class TestController {
             response = TestResponse(TestStatus.ERROR, e.cause!!)
         }
         response.sessionId = httpSession.id
-        httpSession.invalidate()
         return response
     }
 

@@ -14,7 +14,7 @@ import java.lang.reflect.Method
  * Created by gerakln on 21.08.16.
  */
 object TestServer {
-    private var sessionId: String? = null
+    var sessionId: String? = null
 
     private val baseUrl = "http://${Config.host}:${Config.port}/${Config.contextRoot}"
 
@@ -33,7 +33,7 @@ object TestServer {
         restTemplate
     }
 
-    fun getResponse(javaMethod: Method, type: String, saveSession: Boolean = true): TestResponse<*> {
+    fun getResponse(javaMethod: Method, type: String): TestResponse<*> {
         val className = javaMethod.declaringClass.name
         val methodName = javaMethod.name
         val uri = "$baseUrl/$type/$className/$methodName"
@@ -49,13 +49,9 @@ object TestServer {
                             TestResponse::class.java
                     )
                     .body
+            sessionId = testResult.sessionId
         } catch(e: RestClientException) {
             throw RuntimeException("Не найден продеплоеный тест по адресу $uri")
-        }
-        if (saveSession) {
-            sessionId = testResult.sessionId
-        } else {
-            sessionId = null
         }
         return testResult
     }

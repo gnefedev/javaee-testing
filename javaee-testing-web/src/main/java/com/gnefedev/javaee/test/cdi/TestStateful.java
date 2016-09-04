@@ -8,6 +8,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 
 import javax.ejb.Stateful;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 
 import static org.junit.Assert.assertEquals;
@@ -15,6 +16,7 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by gerakln on 27.08.16.
  */
+@RequestScoped
 @Stateful
 @RunWith(JavaeeTestRunner.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
