@@ -30,10 +30,10 @@ internal open class OfflineConfig : BeanDefinitionRegistryPostProcessor {
         scanner.addIncludeFilter(AnnotationTypeFilter(Stateful::class.java))
         for (definition in scanner.findCandidateComponents("com.gnefedev")) {
             val candidateClass = Class.forName(definition.beanClassName)
-            if (candidateClass.isAnnotationPresent(Stateful::class.java)) {
-                definition.scope = "test"
-            } else if (TestsFilter.isTestClass(candidateClass) || candidateClass.isAnnotationPresent(Stateless::class.java)) {
+            if (TestsFilter.isTestClass(candidateClass) || candidateClass.isAnnotationPresent(Stateless::class.java)) {
                 definition.scope = "prototype"
+            } else if (candidateClass.isAnnotationPresent(Stateful::class.java)) {
+                definition.scope = "test"
             }
             registry.registerBeanDefinition(candidateClass.name, definition)
         }
