@@ -1,4 +1,4 @@
-package com.gnefedev.sample;
+package com.gnefedev.test.simple;
 
 import javax.ejb.Stateful;
 import javax.enterprise.context.SessionScoped;

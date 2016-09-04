@@ -1,7 +1,7 @@
 package com.gnefedev.javaee.test.cdi;
 
 import com.gnefedev.javaee.testing.junit.JavaeeTestRunner;
-import com.gnefedev.sample.StatefulExample;
+import com.gnefedev.test.simple.StatefulExample;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;

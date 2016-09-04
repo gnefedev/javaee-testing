@@ -1,6 +1,7 @@
 package com.gnefedev.javaee.test.suite;
 
 import com.gnefedev.javaee.test.cdi.TestInject;
+import com.gnefedev.javaee.test.cdi.TestInterceptor;
 import com.gnefedev.javaee.test.cdi.TestStateful;
 import com.gnefedev.javaee.test.cdi.TestStatefulCopy;
 import org.junit.runner.RunWith;
@@ -15,6 +16,7 @@ import org.junit.runners.Suite.SuiteClasses;
         TestInject.class,
         TestStateful.class,
         TestStatefulCopy.class,
+        TestInterceptor.class
 })
 public class CdiSuite {
 }
