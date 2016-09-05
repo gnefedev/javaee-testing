@@ -8,7 +8,9 @@ import javax.interceptor.Interceptors;
  */
 @Stateless
 @Interceptors(CounterInterceptor.class)
-public class InterceptedEjb {
+public class SecondInterceptedEjb {
+    public void clear() {}
+
     public int countReplacedByInterceptor() {
         return 0;
     }

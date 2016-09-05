@@ -1,7 +1,9 @@
 package com.gnefedev.javaee.test.cdi;
 
 import com.gnefedev.javaee.testing.junit.JavaeeTestRunner;
-import com.gnefedev.test.interceptor.InterceptedEjb;
+import com.gnefedev.test.interceptor.FirstInterceptedEjb;
+import com.gnefedev.test.interceptor.SecondInterceptedEjb;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -19,13 +21,25 @@ import static org.junit.Assert.assertEquals;
 @RunWith(JavaeeTestRunner.class)
 public class TestInterceptor {
     @Inject
-    private InterceptedEjb interceptedEjb;
+    private FirstInterceptedEjb firstInstance;
+    @Inject
+    private SecondInterceptedEjb secondInstance;
+
+    @Before
+    public void before() {
+        firstInstance.clear();
+        secondInstance.clear();
+    }
 
     @Test
     public void testCounter() {
-        interceptedEjb.callToCount();
-        assertEquals(1, interceptedEjb.countReplacedByInterceptor());
-        interceptedEjb.callToCount();
-        assertEquals(2, interceptedEjb.countReplacedByInterceptor());
+        firstInstance.callToCount();
+        assertEquals(1, firstInstance.countReplacedByInterceptor());
+        firstInstance.callToCount();
+        assertEquals(2, firstInstance.countReplacedByInterceptor());
+
+        assertEquals(0, secondInstance.countReplacedByInterceptor());
+        secondInstance.callToCount();
+        assertEquals(1, secondInstance.countReplacedByInterceptor());
     }
 }

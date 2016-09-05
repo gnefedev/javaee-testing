@@ -11,10 +11,15 @@ public class CounterInterceptor {
     @AroundInvoke
     public Object testing(InvocationContext context) throws Exception {
         String methodName = context.getMethod().getName();
-        if (methodName.equals("callToCount")) {
-            callsCount++;
-        } else if (methodName.equals("countReplacedByInterceptor")) {
-            return callsCount;
+        switch (methodName) {
+            case "callToCount":
+                callsCount++;
+                break;
+            case "countReplacedByInterceptor":
+                return callsCount;
+            case "clear":
+                callsCount = 0;
+                break;
         }
         return context.proceed();
     }

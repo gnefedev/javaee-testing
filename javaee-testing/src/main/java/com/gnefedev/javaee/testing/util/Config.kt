@@ -22,7 +22,12 @@ object Config {
     val port: Int = properties.getProperty("port", "8080").toInt()
     val contextRoot: String = properties.getProperty("context-root", "test")
 
-    val testMode: TestMode by lazy { testMode() }
+    val testMode: TestMode by lazy {
+        val result = testMode()
+        //TODO to log or remove
+        println(result)
+        return@lazy result
+    }
 
     private fun testMode(): TestMode {
         if (inServer()) {
