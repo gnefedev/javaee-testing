@@ -34,7 +34,8 @@ internal class JeeScanner : BeanDefinitionRegistryPostProcessor {
     private fun registerInterceptors(registry: BeanDefinitionRegistry, candidateClass: Class<*>) {
         candidateClass
                 .methods
-                .flatMap { it.interceptors() }
+                .filter { it.declaringClass != Any::class.java }
+                .flatMap { it.getInterceptors() }
                 .toSet()
                 .filter { !registry.containsBeanDefinition(it.name) }
                 .map { BeanDefinitionBuilder.rootBeanDefinition(it) }

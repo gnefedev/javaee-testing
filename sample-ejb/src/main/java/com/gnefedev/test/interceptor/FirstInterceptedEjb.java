@@ -9,11 +9,13 @@ import javax.interceptor.Interceptors;
 @Stateless
 @Interceptors(CounterInterceptor.class)
 public class FirstInterceptedEjb {
+    @Interceptors(HitInterceptor.class)
     public void clear() {}
 
     public int countReplacedByInterceptor() {
         return 0;
     }
 
+    @Interceptors(HitInterceptor.class)
     public void callToCount() {}
 }

@@ -8,7 +8,7 @@ import javax.interceptor.InvocationContext
 /**
  * Created by gerakln on 05.09.16.
  */
-internal class InvocationContextImpl(val invocation: MethodInvocation) : InvocationContext {
+internal class InvocationContextSpring(val invocation: MethodInvocation) : InvocationContext {
     override fun proceed(): Any? = invocation.proceed()
 
     override fun getTarget(): Any = invocation.`this`

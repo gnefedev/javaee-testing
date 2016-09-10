@@ -2,6 +2,7 @@ package com.gnefedev.javaee.test.cdi;
 
 import com.gnefedev.javaee.testing.junit.JavaeeTestRunner;
 import com.gnefedev.test.interceptor.FirstInterceptedEjb;
+import com.gnefedev.test.interceptor.HitInterceptor;
 import com.gnefedev.test.interceptor.SecondInterceptedEjb;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,7 +12,7 @@ import javax.ejb.Stateful;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 /**
  * Created by gerakln on 04.09.16.
@@ -41,5 +42,14 @@ public class TestInterceptor {
         assertEquals(0, secondInstance.countReplacedByInterceptor());
         secondInstance.callToCount();
         assertEquals(1, secondInstance.countReplacedByInterceptor());
+    }
+
+    @Test
+    public void allTypes() {
+        assertFalse(HitInterceptor.wasCalled);
+        assertEquals(0, firstInstance.countReplacedByInterceptor());
+        firstInstance.callToCount();
+        assertEquals(1, firstInstance.countReplacedByInterceptor());
+        assertTrue(HitInterceptor.wasCalled);
     }
 }
