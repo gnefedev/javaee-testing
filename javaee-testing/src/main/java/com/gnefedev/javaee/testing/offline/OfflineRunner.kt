@@ -7,9 +7,9 @@ import org.junit.runners.model.Statement
 /**
  * Created by gerakln on 03.09.16.
  */
-class OfflineRunner(private val klass: Class<*>) : RunnerDelegate(klass) {
+internal class OfflineRunner(private val klass: Class<*>) : RunnerDelegate(klass) {
     override fun createTest(): Any {
-        return ContextHolder.context.getBean(klass)
+        return OfflineContextHolder.context.getBean(klass)
     }
 
     override fun withAfterClasses(statement: Statement?): Statement {

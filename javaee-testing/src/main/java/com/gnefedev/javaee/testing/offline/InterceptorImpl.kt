@@ -33,7 +33,7 @@ internal class InterceptorImpl : MethodInterceptor {
             invocation
                     .method
                     .getInterceptors()
-                    .map { ContextHolder.context.getBean(it) }
+                    .map { OfflineContextHolder.context.getBean(it) }
                     .toList()
         }
         return interceptors

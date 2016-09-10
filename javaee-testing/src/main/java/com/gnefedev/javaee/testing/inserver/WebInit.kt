@@ -13,11 +13,16 @@ import javax.servlet.ServletException
 class WebInit : WebApplicationInitializer {
     @Throws(ServletException::class)
     override fun onStartup(servletContext: ServletContext) {
+        isStarted = true
         val context = AnnotationConfigWebApplicationContext()
         context.register(WebConfig::class.java)
         servletContext.addListener(ContextLoaderListener(context))
         val dispatcher = servletContext.addServlet("onlineTestServlet", DispatcherServlet(context))
         dispatcher.setLoadOnStartup(1)
         dispatcher.addMapping("/*")
+    }
+
+    companion object {
+        var isStarted = false
     }
 }

@@ -1,9 +1,9 @@
 package com.gnefedev.javaee.testing.util
 
 import com.gnefedev.javaee.testing.against.server.TestServer
+import com.gnefedev.javaee.testing.inserver.WebInit
 import com.gnefedev.javaee.testing.model.TestMode
 import java.util.*
-import javax.naming.InitialContext
 
 /**
  * Created by gerakln on 03.09.16.
@@ -30,7 +30,7 @@ object Config {
     }
 
     private fun testMode(): TestMode {
-        if (inServer()) {
+        if (WebInit.isStarted) {
             return TestMode.IN_SERVER
         } else {
             val fromFile = properties.getProperty("test-mode", "auto").toUpperCase()
@@ -42,14 +42,5 @@ object Config {
                 return TestMode.OFFLINE
             }
         }
-    }
-
-    private fun inServer(): Boolean {
-        try {
-            InitialContext().environment
-        } catch(e: Exception) {
-            return false
-        }
-        return true
     }
 }

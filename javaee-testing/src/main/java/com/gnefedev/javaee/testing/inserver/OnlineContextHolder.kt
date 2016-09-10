@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component
  * Created by gerakln on 21.08.16.
  */
 @Component
-object ContextHolder : ApplicationContextAware {
+internal object OnlineContextHolder : ApplicationContextAware {
     lateinit var context: ApplicationContext
 
     override fun setApplicationContext(applicationContext: ApplicationContext?) {

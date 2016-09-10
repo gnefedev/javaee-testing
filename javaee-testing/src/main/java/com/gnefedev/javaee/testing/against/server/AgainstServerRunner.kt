@@ -8,7 +8,7 @@ import org.junit.runners.model.Statement
 /**
  * Created by gerakln on 14.08.16.
  */
-class AgainstServerRunner(klass: Class<*>) : RunnerDelegate(klass) {
+internal class AgainstServerRunner(klass: Class<*>) : RunnerDelegate(klass) {
     override fun methodInvoker(method: FrameworkMethod?, test: Any?): Statement {
         return WebMethodInvoker(method!!)
     }

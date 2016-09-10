@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController
 import javax.servlet.http.HttpSession
 
 @RestController
-class TestController {
+internal object TestController {
     @RequestMapping("/test/{testClass}/{methodName}", produces = arrayOf(MediaType.APPLICATION_XML_VALUE))
     fun runMethod(@PathVariable testClass: Class<*>, @PathVariable methodName: String, httpSession: HttpSession): TestResponse<*> {
         val junit = JUnitCore()

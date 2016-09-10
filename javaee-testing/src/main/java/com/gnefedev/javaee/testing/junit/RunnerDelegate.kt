@@ -7,7 +7,7 @@ import org.junit.runners.model.Statement
 /**
  * Created by gerakln on 27.08.16.
  */
-abstract class RunnerDelegate(klass: Class<*>) : BlockJUnit4ClassRunner(klass) {
+abstract internal class RunnerDelegate(klass: Class<*>) : BlockJUnit4ClassRunner(klass) {
     @Throws(Exception::class)
     override public fun createTest(): Any {
         return super.createTest()

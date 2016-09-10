@@ -6,9 +6,9 @@ import org.junit.runners.model.Statement
 /**
  * Created by gerakln on 14.08.16.
  */
-class OnlineRunner(private val klass: Class<*>) : RunnerDelegate(klass) {
+internal class OnlineRunner(private val klass: Class<*>) : RunnerDelegate(klass) {
     private fun sessionRegister(): EjbRegister {
-        return ContextHolder.getBean(EjbRegister::class.java)
+        return OnlineContextHolder.getBean(EjbRegister::class.java)
     }
 
     @Throws(Exception::class)
