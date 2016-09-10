@@ -38,6 +38,7 @@ public class TestInterceptor {
         assertEquals(1, firstInstance.countReplacedByInterceptor());
         firstInstance.callToCount();
         assertEquals(2, firstInstance.countReplacedByInterceptor());
+        assertEquals(4, firstInstance.sumWithCount(2));
 
         assertEquals(0, secondInstance.countReplacedByInterceptor());
         secondInstance.callToCount();

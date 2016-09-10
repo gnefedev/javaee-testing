@@ -17,6 +17,8 @@ public class CounterInterceptor {
                 break;
             case "countReplacedByInterceptor":
                 return callsCount;
+            case "sumWithCount":
+                return callsCount + (Integer) context.getParameters()[0];
             case "clear":
                 callsCount = 0;
                 break;

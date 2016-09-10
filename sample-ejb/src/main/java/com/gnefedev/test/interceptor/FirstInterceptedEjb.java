@@ -18,4 +18,8 @@ public class FirstInterceptedEjb {
 
     @Interceptors(HitInterceptor.class)
     public void callToCount() {}
+
+    public int sumWithCount(int num) {
+        return 0;
+    }
 }
