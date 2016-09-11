@@ -1,4 +1,4 @@
-package com.gnefedev.test.simple;
+package com.gnefedev.test.simple.animals;
 
 import javax.ejb.Stateful;
 

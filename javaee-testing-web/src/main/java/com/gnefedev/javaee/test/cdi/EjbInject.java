@@ -1,13 +1,15 @@
 package com.gnefedev.javaee.test.cdi;
 
 import com.gnefedev.javaee.testing.junit.JavaeeTestRunner;
-import com.gnefedev.test.simple.Animal;
+import com.gnefedev.test.simple.animals.Animal;
+import com.gnefedev.test.simple.animals.King;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateful;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 
 import static org.junit.Assert.assertEquals;
 
@@ -22,10 +24,14 @@ public class EjbInject {
     private Animal dog;
     @EJB(beanName = "cat")
     private Animal cat;
+    @King
+    @Inject
+    private Animal king;
 
     @Test
     public void animals() {
         assertEquals("bark", dog.sound());
         assertEquals("meaou", cat.sound());
+        assertEquals("r-r-r", king.sound());
     }
 }
