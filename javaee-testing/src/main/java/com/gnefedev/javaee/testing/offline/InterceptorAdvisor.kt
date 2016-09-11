@@ -12,5 +12,6 @@ import javax.interceptor.Interceptors
 internal class InterceptorAdvisor(advice: Advice) : StaticMethodMatcherPointcutAdvisor(advice) {
     override fun matches(method: Method, targetClass: Class<*>): Boolean {
         return targetClass.isAnnotationPresent(Interceptors::class.java)
+                || method.isAnnotationPresent(Interceptors::class.java)
     }
 }
