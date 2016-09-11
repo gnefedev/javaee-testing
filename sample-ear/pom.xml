@@ -36,7 +36,7 @@
                             <groupId>com.gnefedev</groupId>
                             <artifactId>javaee-testing-web</artifactId>
                             <bundleFileName>javaee-testing-web.war</bundleFileName>
-                            <contextRoot>/test</contextRoot>
+                            <contextRoot>/javaee-testing</contextRoot>
                         </webModule>
                         <ejbModule>
                             <groupId>com.gnefedev</groupId>

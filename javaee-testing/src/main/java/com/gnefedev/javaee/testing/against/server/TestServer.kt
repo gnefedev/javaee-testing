@@ -1,7 +1,7 @@
 package com.gnefedev.javaee.testing.against.server
 
 import com.gnefedev.javaee.testing.model.TestResponse
-import com.gnefedev.javaee.testing.util.Config
+import com.gnefedev.javaee.testing.Config
 import org.springframework.http.HttpEntity
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpMethod

@@ -1,4 +1,4 @@
-package com.gnefedev.javaee.testing.util
+package com.gnefedev.javaee.testing
 
 import com.gnefedev.javaee.testing.against.server.TestServer
 import com.gnefedev.javaee.testing.inserver.WebInit
@@ -20,7 +20,7 @@ object Config {
 
     val host: String = properties.getProperty("host", "localhost")
     val port: Int = properties.getProperty("port", "8080").toInt()
-    val contextRoot: String = properties.getProperty("context-root", "test")
+    val contextRoot: String = properties.getProperty("context-root", "javaee-testing")
 
     val testMode: TestMode by lazy {
         val result = testMode()

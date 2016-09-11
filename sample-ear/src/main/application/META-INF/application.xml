@@ -7,7 +7,7 @@
   <module>
     <web>
       <web-uri>javaee-testing-web.war</web-uri>
-      <context-root>/test</context-root>
+      <context-root>/javaee-testing</context-root>
     </web>
   </module>
   <module>

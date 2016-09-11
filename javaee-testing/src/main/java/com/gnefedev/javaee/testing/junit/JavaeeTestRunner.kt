@@ -4,7 +4,7 @@ import com.gnefedev.javaee.testing.against.server.AgainstServerRunner
 import com.gnefedev.javaee.testing.model.TestMode.*
 import com.gnefedev.javaee.testing.offline.OfflineRunner
 import com.gnefedev.javaee.testing.inserver.OnlineRunner
-import com.gnefedev.javaee.testing.util.Config
+import com.gnefedev.javaee.testing.Config
 import org.junit.runners.BlockJUnit4ClassRunner
 import org.junit.runners.model.FrameworkMethod
 import org.junit.runners.model.Statement
