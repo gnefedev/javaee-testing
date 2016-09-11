@@ -28,6 +28,10 @@
             <artifactId>sample-ejb</artifactId>
             <type>ejb</type>
         </dependency>
+        <dependency>
+            <groupId>org.hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
@@ -39,6 +43,62 @@
     </build>
 
     <profiles>
+        <profile>
+            <id>WildflyResources</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.wildfly.plugins</groupId>
+                        <artifactId>wildfly-maven-plugin</artifactId>
+                        <dependencies>
+                            <dependency>
+                                <groupId>org.hsqldb</groupId>
+                                <artifactId>hsqldb</artifactId>
+                                <version>${hsqldb.version}</version>
+                            </dependency>
+                        </dependencies>
+                        <executions>
+                            <execution>
+                                <id>deploy-driver</id>
+                                <phase>pre-integration-test</phase>
+                                <configuration>
+                                    <groupId>org.hsqldb</groupId>
+                                    <artifactId>hsqldb</artifactId>
+                                    <name>hsqldb-${hsqldb.version}.jar</name>
+                                </configuration>
+                                <goals>
+                                    <goal>deploy-artifact</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>add-hsqldb</id>
+                                <phase>pre-integration-test</phase>
+                                <goals>
+                                    <goal>add-resource</goal>
+                                </goals>
+                                <configuration>
+                                    <address>subsystem=datasources,data-source=java:/jdbc/zoo</address>
+                                    <resources>
+                                        <resource>
+                                            <properties>
+                                                <jndi-name>java:/jdbc/zoo</jndi-name>
+                                                <enabled>true</enabled>
+                                                <connection-url>
+                                                    jdbc:hsqldb:mem:unit-testing-jpa
+                                                </connection-url>
+                                                <driver-name>hsqldb-${hsqldb.version}.jar</driver-name>
+                                                <user-name>sa</user-name>
+                                                <password>sa</password>
+                                            </properties>
+                                        </resource>
+                                    </resources>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
         <profile>
             <id>WildflyTest</id>
             <build>
@@ -65,7 +125,7 @@
                         <executions>
                             <execution>
                                 <id>start</id>
-                                <phase>pre-integration-test</phase>
+                                <phase>package</phase>
                                 <goals>
                                     <goal>start</goal>
                                 </goals>

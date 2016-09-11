@@ -23,6 +23,7 @@
         <spring.version>4.2.2.RELEASE</spring.version>
         <jackson.version>2.6.3</jackson.version>
         <kotlin.version>1.0.3</kotlin.version>
+        <hsqldb.version>2.3.3</hsqldb.version>
     </properties>
 
     <dependencyManagement>
@@ -51,6 +52,23 @@
                 <version>7.0</version>
                 <scope>provided</scope>
             </dependency>
+
+            <dependency>
+                <groupId>dom4j</groupId>
+                <artifactId>dom4j</artifactId>
+                <version>1.6.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-entitymanager</artifactId>
+                <version>5.1.1.Final</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hsqldb</groupId>
+                <artifactId>hsqldb</artifactId>
+                <version>${hsqldb.version}</version>
+            </dependency>
+
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
