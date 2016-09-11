@@ -2,6 +2,7 @@ package com.gnefedev.javaee.test.cdi;
 
 import com.gnefedev.javaee.testing.junit.JavaeeTestRunner;
 import com.gnefedev.test.simple.animals.Animal;
+import com.gnefedev.test.simple.animals.Biggest;
 import com.gnefedev.test.simple.animals.King;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,14 +25,21 @@ public class EjbInject {
     private Animal dog;
     @EJB(beanName = "cat")
     private Animal cat;
+    @EJB(beanName = "Bear")
+    private Animal bear;
     @King
     @Inject
     private Animal king;
+    @Biggest
+    @Inject
+    private Animal elephantOrBear;
 
     @Test
     public void animals() {
         assertEquals("bark", dog.sound());
         assertEquals("meaou", cat.sound());
         assertEquals("r-r-r", king.sound());
+        assertEquals("gr", bear.sound());
+        assertEquals("ugh", elephantOrBear.sound());
     }
 }

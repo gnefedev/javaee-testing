@@ -8,11 +8,17 @@ import org.springframework.context.annotation.ClassPathScanningCandidateComponen
 import org.springframework.core.type.filter.AnnotationTypeFilter
 import javax.ejb.Stateful
 import javax.ejb.Stateless
+import javax.enterprise.inject.Alternative
 
 /**
  * Created by gerakln on 04.09.16.
  */
 internal class JeeScanner : BeanDefinitionRegistryPostProcessor {
+    private val registerdAlternatives: Set<String> by lazy {
+        return@lazy setOf("com.gnefedev.test.simple.animals.Elephant")
+    }
+
+
     override fun postProcessBeanDefinitionRegistry(registry: BeanDefinitionRegistry) {
         val scanner = ClassPathScanningCandidateComponentProvider(false)
         scanner.addIncludeFilter(TestsFilter())
@@ -25,10 +31,21 @@ internal class JeeScanner : BeanDefinitionRegistryPostProcessor {
             } else if (candidateClass.isAnnotationPresent(Stateful::class.java)) {
                 definition.scope = "test"
             }
-            registry.registerBeanDefinition(chooseName(candidateClass), definition)
+            if (isValid(candidateClass)) {
+                if (registerdAlternatives.contains(candidateClass.name)) {
+                    definition.isPrimary = true
+                }
 
-            registerInterceptors(registry, candidateClass)
+                registry.registerBeanDefinition(chooseName(candidateClass), definition)
+
+                registerInterceptors(registry, candidateClass)
+            }
         }
+    }
+
+    private fun isValid(candidate: Class<*>): Boolean {
+        return !candidate.isAnnotationPresent(Alternative::class.java)
+                || registerdAlternatives.contains(candidate.name)
     }
 
     private fun chooseName(candidateClass: Class<*>): String? {
@@ -45,7 +62,7 @@ internal class JeeScanner : BeanDefinitionRegistryPostProcessor {
 
     private fun getName(candidateClass: Class<*>, possibleName: String): String {
         if (possibleName.isBlank()) {
-            return candidateClass.name
+            return candidateClass.simpleName
         } else {
             return possibleName
         }
@@ -65,6 +82,5 @@ internal class JeeScanner : BeanDefinitionRegistryPostProcessor {
     }
 
     override fun postProcessBeanFactory(configurableListableBeanFactory: ConfigurableListableBeanFactory) {
-
     }
 }

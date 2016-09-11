@@ -34,10 +34,11 @@ save state among test methods of one test class.
 
 ## Capabilities in OFFLINE:
 1. CDI:
-    * @Inject
+    * @Inject, @EJB
+    * @Alternative, @Qualifier
     * @Stateful with @SessionScope and @RequestScope
     * @Interceptors (without changes of setParameters(), getContextData()
-     and getTimer()
+     and getTimer(), not controlled order of interceptors)
      
 ## Customisation
 Add javaee-testing.properties to you resources in WAR
