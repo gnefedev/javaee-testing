@@ -35,11 +35,15 @@ public class EjbInject {
     private Animal elephantOrBear;
 
     @Test
-    public void animals() {
+    public void statelessNames() {
         assertEquals("bark", dog.sound());
         assertEquals("meaou", cat.sound());
-        assertEquals("r-r-r", king.sound());
         assertEquals("gr", bear.sound());
+    }
+
+    @Test
+    public void qualifiersWithAlternatives() {
+        assertEquals("r-r-r", king.sound());
         assertEquals("ugh", elephantOrBear.sound());
     }
 }

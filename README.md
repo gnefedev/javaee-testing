@@ -47,3 +47,8 @@ Add javaee-testing.properties to you resources in WAR
 2. port - default "8080".
 3. context-root - context root of WAR with tests default "javaee-testing".
 4. test-mode - AGAINST_SERVER or OFFLINE. Will choose by ping if not specified.
+
+## Crazy things that not implemented in OFFLINE:
+1. Two different instances of same @Stateful bean in one object
+2. In JavaEE every module looks on own beans.xml. OFFLINE looks only on 
+one in classpath.
