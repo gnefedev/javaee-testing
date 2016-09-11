@@ -1,9 +1,6 @@
 package com.gnefedev.javaee.test.suite;
 
-import com.gnefedev.javaee.test.cdi.SimpleInject;
-import com.gnefedev.javaee.test.cdi.Interceptors;
-import com.gnefedev.javaee.test.cdi.TestOfStateful;
-import com.gnefedev.javaee.test.cdi.TestOfStatefulCopy;
+import com.gnefedev.javaee.test.cdi.*;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
@@ -16,7 +13,8 @@ import org.junit.runners.Suite.SuiteClasses;
         SimpleInject.class,
         TestOfStateful.class,
         TestOfStatefulCopy.class,
-        Interceptors.class
+        Interceptors.class,
+        EjbInject.class
 })
 public class CdiSuite {
 }

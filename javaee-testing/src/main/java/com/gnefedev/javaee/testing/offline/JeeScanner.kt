@@ -25,9 +25,29 @@ internal class JeeScanner : BeanDefinitionRegistryPostProcessor {
             } else if (candidateClass.isAnnotationPresent(Stateful::class.java)) {
                 definition.scope = "test"
             }
-            registry.registerBeanDefinition(candidateClass.name, definition)
+            registry.registerBeanDefinition(chooseName(candidateClass), definition)
 
             registerInterceptors(registry, candidateClass)
+        }
+    }
+
+    private fun chooseName(candidateClass: Class<*>): String? {
+        if (candidateClass.isAnnotationPresent(Stateful::class.java)) {
+            val annotation = candidateClass.getAnnotation(Stateful::class.java)
+            return getName(candidateClass, annotation.name)
+        } else if (candidateClass.isAnnotationPresent(Stateless::class.java)) {
+            val annotation = candidateClass.getAnnotation(Stateless::class.java)
+            return getName(candidateClass, annotation.name)
+        } else {
+            error("Not supported annotation")
+        }
+    }
+
+    private fun getName(candidateClass: Class<*>, possibleName: String): String {
+        if (possibleName.isBlank()) {
+            return candidateClass.name
+        } else {
+            return possibleName
         }
     }
 
