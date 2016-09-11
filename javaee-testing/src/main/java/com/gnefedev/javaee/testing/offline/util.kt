@@ -1,7 +1,6 @@
 package com.gnefedev.javaee.testing.offline
 
 import java.lang.reflect.Method
-import javax.interceptor.AroundInvoke
 import javax.interceptor.Interceptors
 import kotlin.reflect.KClass
 
@@ -22,10 +21,4 @@ fun Method.getInterceptors(): List<Class<out Any>> {
         methodInterceptors = emptyArray()
     }
     return classInterceptors.map { it.java } + methodInterceptors.map { it.java }
-}
-
-fun Class<*>.aroundInvoke(): Method {
-    return methods
-            .filter { it.isAnnotationPresent(AroundInvoke::class.java) }
-            .first()
 }

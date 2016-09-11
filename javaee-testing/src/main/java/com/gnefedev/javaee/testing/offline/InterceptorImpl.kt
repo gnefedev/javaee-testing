@@ -16,14 +16,13 @@ internal class InterceptorImpl : MethodInterceptor {
         }
         var interceptorInvoker: InterceptorInvoker? = null
         for (interceptor in interceptors) {
-            val aroundInvoke = interceptor.javaClass.aroundInvoke()
             val invocationContext: InvocationContext
             if (interceptorInvoker == null) {
                 invocationContext = InvocationContextSpring(invocation)
             } else {
                 invocationContext = InvocationContextEE(interceptorInvoker)
             }
-            interceptorInvoker = InterceptorInvoker(invocationContext, aroundInvoke, interceptor)
+            interceptorInvoker = InterceptorInvoker(invocationContext, interceptor)
         }
         return interceptorInvoker!!.invoke()
     }
