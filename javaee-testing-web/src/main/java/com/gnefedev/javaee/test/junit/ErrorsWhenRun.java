@@ -10,11 +10,11 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by gerakln on 04.09.16.
  */
-public class TestErrorsWhenRun {
+public class ErrorsWhenRun {
     @Test
     public void testErrors() {
         JUnitCore jUnit = new JUnitCore();
-        Result result = jUnit.run(TestErrors.class);
+        Result result = jUnit.run(TestWithErrors.class);
         assertEquals(2, result.getFailureCount());
         Failure assertFail = null;
         Failure npe = null;

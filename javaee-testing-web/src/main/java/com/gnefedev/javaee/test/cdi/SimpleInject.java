@@ -17,7 +17,7 @@ import static org.junit.Assert.assertEquals;
 @RequestScoped
 @Stateful
 @RunWith(JavaeeTestRunner.class)
-public class TestInject {
+public class SimpleInject {
     @Inject
     private StatelessExample stateless;
 

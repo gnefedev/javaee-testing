@@ -20,7 +20,7 @@ import static org.junit.Assert.assertEquals;
 @Stateful
 @RunWith(JavaeeTestRunner.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class TestStatefulCopy {
+public class TestOfStatefulCopy {
     @Inject
     private StatefulExample stateful;
 

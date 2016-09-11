@@ -7,7 +7,7 @@ import org.junit.BeforeClass;
 /**
  * Created by gerakln on 25.08.16.
  */
-public class TestLifecycleSuperClass {
+public class LifecycleOfTestSuperClass {
     protected static boolean beforeClassInSuperClass = false;
     protected boolean beforeInSuperClass = false;
     @BeforeClass

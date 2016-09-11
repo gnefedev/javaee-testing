@@ -17,7 +17,7 @@ import static org.junit.Assert.*;
 @Stateful
 @RunWith(JavaeeTestRunner.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class TestLifecycle extends TestLifecycleSuperClass {
+public class LifecycleOfTest extends LifecycleOfTestSuperClass {
     private static int beforeClassWasCalled = 0;
     private static int callsCount;
     private static int beforeWasCalled;

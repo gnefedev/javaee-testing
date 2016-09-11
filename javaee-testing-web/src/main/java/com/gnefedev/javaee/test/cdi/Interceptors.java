@@ -1,9 +1,9 @@
 package com.gnefedev.javaee.test.cdi;
 
 import com.gnefedev.javaee.testing.junit.JavaeeTestRunner;
-import com.gnefedev.test.interceptor.FirstInterceptedEjb;
+import com.gnefedev.test.interceptor.InterceptedEjb;
 import com.gnefedev.test.interceptor.HitInterceptor;
-import com.gnefedev.test.interceptor.SecondInterceptedEjb;
+import com.gnefedev.test.interceptor.AnotherInterceptedEjb;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,11 +20,11 @@ import static org.junit.Assert.*;
 @RequestScoped
 @Stateful
 @RunWith(JavaeeTestRunner.class)
-public class TestInterceptor {
+public class Interceptors {
     @Inject
-    private FirstInterceptedEjb firstInstance;
+    private InterceptedEjb firstInstance;
     @Inject
-    private SecondInterceptedEjb secondInstance;
+    private AnotherInterceptedEjb secondInstance;
 
     @Before
     public void before() {

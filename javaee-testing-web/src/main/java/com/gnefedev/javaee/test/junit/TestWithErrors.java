@@ -18,7 +18,7 @@ import static org.junit.Assert.assertTrue;
 @Stateful
 @RunWith(JavaeeTestRunner.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class TestErrors {
+public class TestWithErrors {
 
     @Test
     public void assertFail() {

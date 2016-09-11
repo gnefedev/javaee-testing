@@ -8,18 +8,12 @@ import javax.interceptor.Interceptors;
  */
 @Stateless
 @Interceptors(CounterInterceptor.class)
-public class FirstInterceptedEjb {
-    @Interceptors(HitInterceptor.class)
+public class AnotherInterceptedEjb {
     public void clear() {}
 
     public int countReplacedByInterceptor() {
         return 0;
     }
 
-    @Interceptors(HitInterceptor.class)
     public void callToCount() {}
-
-    public int sumWithCount(int num) {
-        return 0;
-    }
 }
