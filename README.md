@@ -21,7 +21,8 @@ by ping of deployed application (OFFLINE if fail).
  `@RequestScoped`
  `@Stateful`
  `@RunWith(JavaeeTestRunner.class)`
- 3. Add this WAR to application EAR and enjoy.
+ 3. Create javaee-testing.properties file and add packageToScan property 
+ 4. Add this WAR to application EAR and enjoy.
 
 
 ## Capabilities in AGAINST_SERVER:
@@ -43,10 +44,11 @@ save state among test methods of one test class.
 ## Customisation
 Add javaee-testing.properties to you resources in WAR
 
-1. host - where to find deployed application default "localhost". 
-2. port - default "8080".
-3. context-root - context root of WAR with tests default "javaee-testing".
-4. test-mode - AGAINST_SERVER or OFFLINE. Will choose by ping if not specified.
+1. packageToScan - package for scan you JEE beans
+2. host - where to find deployed application default "localhost". 
+3. port - default "8080".
+4. context-root - context root of WAR with tests default "javaee-testing".
+5. test-mode - AGAINST_SERVER or OFFLINE. Will choose by ping if not specified.
 
 ## Crazy things that not implemented in OFFLINE:
 1. Two different instances of same @Stateful bean in one object

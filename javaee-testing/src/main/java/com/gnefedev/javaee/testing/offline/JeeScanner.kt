@@ -1,5 +1,6 @@
 package com.gnefedev.javaee.testing.offline
 
+import com.gnefedev.javaee.testing.Config
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory
 import org.springframework.beans.factory.support.BeanDefinitionBuilder
 import org.springframework.beans.factory.support.BeanDefinitionRegistry
@@ -9,6 +10,7 @@ import org.springframework.core.type.filter.AnnotationTypeFilter
 import javax.ejb.Stateful
 import javax.ejb.Stateless
 import javax.enterprise.inject.Alternative
+import javax.validation.ValidationException
 
 /**
  * Created by gerakln on 04.09.16.
@@ -24,7 +26,11 @@ internal class JeeScanner : BeanDefinitionRegistryPostProcessor {
         scanner.addIncludeFilter(TestsFilter())
         scanner.addIncludeFilter(AnnotationTypeFilter(Stateless::class.java))
         scanner.addIncludeFilter(AnnotationTypeFilter(Stateful::class.java))
-        for (definition in scanner.findCandidateComponents("com.gnefedev")) {
+        val packageToScan = Config.packageToScan
+        if (packageToScan.isBlank()) {
+            throw ValidationException("packageToScan is required in javaee-testing.properties")
+        }
+        for (definition in scanner.findCandidateComponents(packageToScan)) {
             val candidateClass = Class.forName(definition.beanClassName)
             if (TestsFilter.isTestClass(candidateClass) || candidateClass.isAnnotationPresent(Stateless::class.java)) {
                 definition.scope = "prototype"

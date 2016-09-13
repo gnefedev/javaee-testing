@@ -19,6 +19,7 @@ internal object Config {
     }
 
     val host: String = properties.getProperty("host", "localhost")
+    val packageToScan: String = properties.getProperty("packageToScan")
     val port: Int = properties.getProperty("port", "8080").toInt()
     val contextRoot: String = properties.getProperty("context-root", "javaee-testing")
 
