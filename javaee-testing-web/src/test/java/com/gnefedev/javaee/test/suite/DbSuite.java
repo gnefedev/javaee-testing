@@ -1,5 +1,6 @@
 package com.gnefedev.javaee.test.suite;
 
+import com.gnefedev.javaee.test.db.AnnotationsTest;
 import com.gnefedev.javaee.test.db.Crud;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -11,6 +12,7 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({
         Crud.class,
+        AnnotationsTest.class
 })
 public class DbSuite {
 }
