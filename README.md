@@ -40,6 +40,11 @@ save state among test methods of one test class.
     * @Stateful with @SessionScope and @RequestScope
     * @Interceptors (without changes of setParameters(), getContextData()
      and getTimer(), not controlled order of interceptors)
+2. Persistence:
+    * Supported: hsqldb
+    * @PersistenceContext injection
+    * @Transactional annotations
+    * bean transaction managements (without setting transaction timeout)
      
 ## Customisation
 Add javaee-testing.properties to you resources in WAR
