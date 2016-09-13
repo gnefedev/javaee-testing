@@ -1,5 +1,6 @@
 package com.gnefedev.javaee.testing.offline
 
+import com.gnefedev.javaee.testing.offline.config.OfflineConfig
 import org.springframework.context.ApplicationContext
 import org.springframework.context.annotation.AnnotationConfigApplicationContext
 

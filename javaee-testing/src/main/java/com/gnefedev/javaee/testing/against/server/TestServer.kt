@@ -1,7 +1,7 @@
 package com.gnefedev.javaee.testing.against.server
 
-import com.gnefedev.javaee.testing.model.TestResponse
 import com.gnefedev.javaee.testing.Config
+import com.gnefedev.javaee.testing.model.TestResponse
 import org.springframework.http.HttpEntity
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpMethod
@@ -13,7 +13,7 @@ import java.lang.reflect.Method
 /**
  * Created by gerakln on 21.08.16.
  */
-object TestServer {
+internal object TestServer {
     var sessionId: String? = null
 
     private val baseUrl = "http://${Config.host}:${Config.port}/${Config.contextRoot}"

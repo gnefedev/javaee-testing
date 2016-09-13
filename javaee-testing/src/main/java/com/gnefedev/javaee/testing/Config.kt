@@ -8,7 +8,7 @@ import java.util.*
 /**
  * Created by gerakln on 03.09.16.
  */
-object Config {
+internal object Config {
     private val properties: Properties by lazy {
         val prop = Properties()
         try {
