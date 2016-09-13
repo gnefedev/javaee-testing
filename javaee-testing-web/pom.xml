@@ -28,10 +28,6 @@
             <artifactId>sample-ejb</artifactId>
             <type>ejb</type>
         </dependency>
-        <dependency>
-            <groupId>org.hsqldb</groupId>
-            <artifactId>hsqldb</artifactId>
-        </dependency>
     </dependencies>
 
     <build>

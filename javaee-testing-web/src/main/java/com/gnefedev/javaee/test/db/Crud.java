@@ -1,9 +1,10 @@
 package com.gnefedev.javaee.test.db;
 
+import com.atomikos.icatch.jta.UserTransactionImp;
+import com.atomikos.jdbc.AtomikosDataSourceBean;
 import com.gnefedev.javaee.testing.junit.JavaeeTestRunner;
 import com.gnefedev.test.db.model.Animal;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
+import org.hsqldb.jdbc.pool.JDBCXADataSource;
 import org.junit.*;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
@@ -12,10 +13,15 @@ import javax.annotation.Resource;
 import javax.ejb.Stateful;
 import javax.ejb.TransactionManagement;
 import javax.enterprise.context.RequestScoped;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
+import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import javax.transaction.UserTransaction;
+import java.sql.SQLException;
 
 import static javax.ejb.TransactionManagementType.BEAN;
 import static org.junit.Assert.assertEquals;
@@ -73,9 +79,9 @@ public class Crud {
 
     private Animal findCow() {
         return entityManager
-                    .createQuery("select c from Animal c where c.type = :type", Animal.class)
-                    .setParameter("type", "cow")
-                    .getSingleResult();
+                .createQuery("select c from Animal c where c.type = :type", Animal.class)
+                .setParameter("type", "cow")
+                .getSingleResult();
     }
 
     @After
