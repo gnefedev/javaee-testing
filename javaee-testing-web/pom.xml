@@ -20,7 +20,12 @@
         </dependency>
         <dependency>
             <groupId>com.gnefedev</groupId>
-            <artifactId>javaee-testing</artifactId>
+            <artifactId>jee-testing.core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.gnefedev</groupId>
+            <artifactId>jee-testing.offline</artifactId>
+            <scope>test</scope>
         </dependency>
 
         <dependency>

@@ -1,6 +1,6 @@
 package com.gnefedev.javaee.test.cdi;
 
-import com.gnefedev.javaee.testing.junit.JavaeeTestRunner;
+import com.gnefedev.jee.testing.junit.JavaeeTestRunner;
 import com.gnefedev.test.simple.animals.Animal;
 import com.gnefedev.test.simple.animals.Biggest;
 import com.gnefedev.test.simple.animals.King;

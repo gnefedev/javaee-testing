@@ -1,6 +1,6 @@
 package com.gnefedev.javaee.test.cdi;
 
-import com.gnefedev.javaee.testing.junit.JavaeeTestRunner;
+import com.gnefedev.jee.testing.junit.JavaeeTestRunner;
 import com.gnefedev.test.interceptor.InterceptedEjb;
 import com.gnefedev.test.interceptor.HitInterceptor;
 import com.gnefedev.test.interceptor.AnotherInterceptedEjb;

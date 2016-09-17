@@ -1,6 +1,6 @@
 package com.gnefedev.javaee.test.junit;
 
-import com.gnefedev.javaee.testing.junit.JavaeeTestRunner;
+import com.gnefedev.jee.testing.junit.JavaeeTestRunner;
 import org.junit.*;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;

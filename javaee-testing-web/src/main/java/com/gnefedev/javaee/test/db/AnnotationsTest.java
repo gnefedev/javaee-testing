@@ -1,25 +1,19 @@
 package com.gnefedev.javaee.test.db;
 
-import com.gnefedev.javaee.testing.junit.JavaeeTestRunner;
+import com.gnefedev.jee.testing.junit.JavaeeTestRunner;
 import com.gnefedev.test.db.model.Animal;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 
-import javax.annotation.Resource;
 import javax.ejb.Stateful;
-import javax.ejb.TransactionManagement;
 import javax.enterprise.context.RequestScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
-import javax.transaction.UserTransaction;
 
-import static javax.ejb.TransactionManagementType.BEAN;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
