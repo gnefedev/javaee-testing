@@ -1,4 +1,4 @@
-package com.gnefedev.jee.testing.offline;
+package com.gnefedev.jee.testing.offline.scanner;
 
 import org.junit.runner.RunWith;
 import org.springframework.core.type.classreading.MetadataReader;

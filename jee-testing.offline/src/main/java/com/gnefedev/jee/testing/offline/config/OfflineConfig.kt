@@ -1,9 +1,9 @@
 package com.gnefedev.jee.testing.offline.config
 
-import com.gnefedev.jee.testing.offline.InterceptorAdvisor
-import com.gnefedev.jee.testing.offline.InterceptorImpl
-import com.gnefedev.jee.testing.offline.JeeScanner
-import com.gnefedev.jee.testing.offline.TestScope
+import com.gnefedev.jee.testing.offline.interceptors.InterceptorAdvisor
+import com.gnefedev.jee.testing.offline.interceptors.InterceptorImpl
+import com.gnefedev.jee.testing.offline.scanner.JeeScanner
+import com.gnefedev.jee.testing.offline.scanner.TestScope
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator
 import org.springframework.beans.factory.config.CustomScopeConfigurer
 import org.springframework.context.annotation.Bean

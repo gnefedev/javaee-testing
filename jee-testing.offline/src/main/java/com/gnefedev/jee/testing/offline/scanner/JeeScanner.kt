@@ -1,6 +1,7 @@
-package com.gnefedev.jee.testing.offline
+package com.gnefedev.jee.testing.offline.scanner
 
 import com.gnefedev.jee.testing.Config
+import com.gnefedev.jee.testing.offline.getInterceptors
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory
 import org.springframework.beans.factory.support.BeanDefinitionBuilder
 import org.springframework.beans.factory.support.BeanDefinitionRegistry

@@ -1,4 +1,4 @@
-package com.gnefedev.jee.testing.offline
+package com.gnefedev.jee.testing.offline.interceptors
 
 import org.aopalliance.intercept.MethodInvocation
 import java.lang.reflect.Constructor

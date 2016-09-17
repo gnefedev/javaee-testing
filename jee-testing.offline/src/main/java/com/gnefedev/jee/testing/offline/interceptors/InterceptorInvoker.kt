@@ -1,4 +1,4 @@
-package com.gnefedev.jee.testing.offline
+package com.gnefedev.jee.testing.offline.interceptors
 
 import java.lang.reflect.Method
 import javax.interceptor.AroundInvoke

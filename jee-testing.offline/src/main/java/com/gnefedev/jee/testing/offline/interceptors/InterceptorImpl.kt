@@ -1,5 +1,7 @@
-package com.gnefedev.jee.testing.offline
+package com.gnefedev.jee.testing.offline.interceptors
 
+import com.gnefedev.jee.testing.offline.OfflineContextHolder
+import com.gnefedev.jee.testing.offline.getInterceptors
 import org.aopalliance.intercept.MethodInterceptor
 import org.aopalliance.intercept.MethodInvocation
 import java.util.*

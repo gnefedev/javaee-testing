@@ -1,5 +1,6 @@
 package com.gnefedev.jee.testing.offline
 
+import com.gnefedev.jee.testing.offline.scanner.TestScope
 import org.junit.runners.model.MultipleFailureException
 import org.junit.runners.model.Statement
 

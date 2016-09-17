@@ -1,4 +1,4 @@
-package com.gnefedev.jee.testing.offline
+package com.gnefedev.jee.testing.offline.scanner
 
 import org.springframework.beans.factory.ObjectFactory
 import org.springframework.beans.factory.config.Scope
