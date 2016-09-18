@@ -55,15 +55,11 @@ public class SenderAndReceive {
         assertNotNull(connectionFactory);
         assertNotNull(requestQueue);
         try (Connection con = connectionFactory.createConnection()) {
-            try (Session session = con.createSession()) {
+            try (Session session = con.createSession(false, Session.AUTO_ACKNOWLEDGE)) {
                 TextMessage request = session.createTextMessage("Hello, world");
                 try (MessageProducer producer = session.createProducer(requestQueue)) {
                     producer.send(request);
                 }
-            }
-        }
-        try (Connection con = connectionFactory.createConnection()) {
-            try (Session session = con.createSession()) {
                 try (MessageConsumer consumer = session.createConsumer(responseQueue)) {
                     con.start();
                     TextMessage response = (TextMessage) consumer.receive(1_000);

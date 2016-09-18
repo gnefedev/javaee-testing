@@ -17,7 +17,8 @@ import javax.naming.Context
 @Configuration
 @Import(
         PersistenceConfig::class,
-        TransactionConfig::class
+        TransactionConfig::class,
+        JmsConfig::class
 )
 internal open class OfflineConfig {
     init {

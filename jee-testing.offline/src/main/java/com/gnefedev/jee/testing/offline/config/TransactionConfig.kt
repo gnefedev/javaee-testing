@@ -14,7 +14,7 @@ import javax.transaction.UserTransaction
  */
 @Configuration
 internal open class TransactionConfig {
-    val TRANSACTION_TIMEOUT = 1000
+    val TRANSACTION_TIMEOUT = 300
 
     @Bean
     open fun transactionManager(): PlatformTransactionManager {
