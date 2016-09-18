@@ -33,6 +33,13 @@
             <artifactId>sample-ejb</artifactId>
             <type>ejb</type>
         </dependency>
+
+
+        <dependency>
+            <groupId>org.hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
+            <version>${hsqldb.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -60,9 +67,10 @@
                         </dependencies>
                         <executions>
                             <execution>
-                                <id>deploy-driver</id>
+                                <id>hsqldb</id>
                                 <phase>pre-integration-test</phase>
                                 <configuration>
+                                    <skip>true</skip>
                                     <groupId>org.hsqldb</groupId>
                                     <artifactId>hsqldb</artifactId>
                                     <name>hsqldb-${hsqldb.version}.jar</name>
@@ -72,12 +80,13 @@
                                 </goals>
                             </execution>
                             <execution>
-                                <id>add-hsqldb</id>
+                                <id>add-zoo</id>
                                 <phase>pre-integration-test</phase>
                                 <goals>
                                     <goal>add-resource</goal>
                                 </goals>
                                 <configuration>
+                                    <skip>true</skip>
                                     <address>subsystem=datasources,data-source=java:/jdbc/zoo</address>
                                     <resources>
                                         <resource>
@@ -90,6 +99,31 @@
                                                 <driver-name>hsqldb-${hsqldb.version}.jar</driver-name>
                                                 <user-name>sa</user-name>
                                                 <password>sa</password>
+                                            </properties>
+                                        </resource>
+                                    </resources>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>mq</id>
+                                <phase>pre-integration-test</phase>
+                                <goals>
+                                    <goal>add-resource</goal>
+                                </goals>
+                                <configuration>
+                                    <resources>
+                                        <resource>
+                                            <address>subsystem=messaging-activemq,server=default,jms-queue=requestQueue</address>
+                                            <properties>
+                                                <durable>true</durable>
+                                                <entries>!!["java:/jms/queue/requestQueue"]</entries>
+                                            </properties>
+                                        </resource>
+                                        <resource>
+                                            <address>subsystem=messaging-activemq,server=default,jms-queue=responseQueue</address>
+                                            <properties>
+                                                <durable>true</durable>
+                                                <entries>!!["java:/jms/queue/responseQueue"]</entries>
                                             </properties>
                                         </resource>
                                     </resources>

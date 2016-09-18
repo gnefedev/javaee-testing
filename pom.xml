@@ -228,6 +228,7 @@
                     <version>1.0.2.Final</version>
                     <configuration>
                         <jbossHome>/home/gerakln/soft/servers/wildfly10/</jbossHome>
+                        <server-config>standalone-full.xml</server-config>
                     </configuration>
                 </plugin>
             </plugins>
