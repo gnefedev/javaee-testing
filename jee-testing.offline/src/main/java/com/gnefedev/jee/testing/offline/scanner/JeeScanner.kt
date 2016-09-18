@@ -2,6 +2,9 @@ package com.gnefedev.jee.testing.offline.scanner
 
 import com.gnefedev.jee.testing.Config
 import com.gnefedev.jee.testing.offline.getInterceptors
+import com.gnefedev.jee.testing.offline.toList
+import org.apache.activemq.command.ActiveMQQueue
+import org.apache.activemq.command.ActiveMQTopic
 import org.springframework.beans.MutablePropertyValues
 import org.springframework.beans.factory.config.BeanDefinition
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory
@@ -13,11 +16,15 @@ import org.springframework.beans.factory.support.GenericBeanDefinition
 import org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider
 import org.springframework.core.type.filter.AnnotationTypeFilter
 import org.springframework.jms.listener.DefaultMessageListenerContainer
+import javax.annotation.Resource
 import javax.ejb.MessageDriven
 import javax.ejb.Stateful
 import javax.ejb.Stateless
 import javax.enterprise.inject.Alternative
+import javax.jms.Queue
+import javax.jms.Topic
 import javax.validation.ValidationException
+import javax.xml.parsers.DocumentBuilderFactory
 
 private fun Class<*>.isStateful() = isAnnotationPresent(Stateful::class.java)
 private fun Class<*>.isStateless() = isAnnotationPresent(Stateless::class.java)
@@ -28,8 +35,20 @@ private fun Class<*>.isTest() = TestsFilter.isTestClass(this)
  * Created by gerakln on 04.09.16.
  */
 internal class JeeScanner : BeanDefinitionRegistryPostProcessor {
-    private val registerdAlternatives: Set<String> by lazy {
-        return@lazy setOf("com.gnefedev.test.simple.animals.Elephant")
+    private val registeredAlternatives: Set<String> by lazy {
+        return@lazy DocumentBuilderFactory
+                .newInstance()
+                .newDocumentBuilder()
+                .parse(javaClass.getResourceAsStream("/META-INF/beans.xml"))
+                .documentElement
+                .childNodes
+                .toList()
+                .first { it.nodeName == "alternatives" }
+                .childNodes
+                .toList()
+                .filter { it.nodeName == "class" }
+                .map { it.textContent }
+                .toSet()
     }
 
 
@@ -44,12 +63,34 @@ internal class JeeScanner : BeanDefinitionRegistryPostProcessor {
             throw ValidationException("packageToScan is required in javaee-testing.properties")
         }
         for (definition in scanner.findCandidateComponents(packageToScan)) {
-            val candidateClass = Class.forName(definition.beanClassName)
-            if (candidateClass.isMdb()) {
-                registerMdb(candidateClass, registry)
+            val beanClass = Class.forName(definition.beanClassName)
+            if (beanClass.isMdb()) {
+                registerMdb(beanClass, registry)
             }
-            registerBean(definition, registry)
+            registerBean(definition, registry, beanClass)
+            registerResources(beanClass, registry)
         }
+    }
+
+    private fun registerResources(beanClass: Class<*>, registry: BeanDefinitionRegistry) {
+        beanClass
+                .declaredFields
+                .filter { it.isAnnotationPresent(Resource::class.java) }
+                .forEach { it ->
+                    val resource = it.getAnnotation(Resource::class.java)
+                    when (it.type) {
+                         Queue::class.java -> registerDestination(resource, registry, ActiveMQQueue::class.java)
+                         Topic::class.java -> registerDestination(resource, registry, ActiveMQTopic::class.java)
+                    }
+                }
+    }
+
+    private fun registerDestination(queue: Resource, registry: BeanDefinitionRegistry, implementation: Class<*>) {
+        val beanDefinition = BeanDefinitionBuilder
+                .genericBeanDefinition(implementation)
+                .addConstructorArgValue(queue.name)
+                .beanDefinition
+        registry.registerBeanDefinition(queue.name, beanDefinition)
     }
 
     private fun registerMdb(mdb: Class<*>, registry: BeanDefinitionRegistry) {
@@ -57,7 +98,13 @@ internal class JeeScanner : BeanDefinitionRegistryPostProcessor {
         listenerDefinition.beanClass = DefaultMessageListenerContainer::class.java
 
         val values = MutablePropertyValues()
-        values.addPropertyValue("destination", RuntimeBeanReference("jms/queue/requestQueue"))
+        val destinationName = mdb
+                .getAnnotation(MessageDriven::class.java)
+                .activationConfig
+                .filter { it.propertyName == "destination" }
+                .map { it.propertyValue }
+                .first()
+        values.addPropertyValue("destination", RuntimeBeanReference(destinationName))
         values.addPropertyValue("messageListener", RuntimeBeanReference(mdb.name))
         values.addPropertyValue("connectionFactory", RuntimeBeanReference("connectionFactory"))
         values.addPropertyValue("transactionManager", RuntimeBeanReference("transactionManager"))
@@ -69,27 +116,26 @@ internal class JeeScanner : BeanDefinitionRegistryPostProcessor {
         registry.registerBeanDefinition(mdb.name + "Listener", listenerDefinition)
     }
 
-    private fun registerBean(definition: BeanDefinition, registry: BeanDefinitionRegistry) {
-        val candidateClass = Class.forName(definition.beanClassName)
-        if (candidateClass.isTest() || candidateClass.isStateless()) {
+    private fun registerBean(definition: BeanDefinition, registry: BeanDefinitionRegistry, beanClass: Class<*>) {
+        if (beanClass.isTest() || beanClass.isStateless()) {
             definition.scope = BeanDefinition.SCOPE_PROTOTYPE
-        } else if (candidateClass.isStateful()) {
+        } else if (beanClass.isStateful()) {
             definition.scope = "test"
         }
-        if (isValid(candidateClass)) {
-            if (registerdAlternatives.contains(candidateClass.name)) {
+        if (isValidBean(beanClass)) {
+            if (registeredAlternatives.contains(beanClass.name)) {
                 definition.isPrimary = true
             }
 
-            registry.registerBeanDefinition(chooseName(candidateClass), definition)
+            registry.registerBeanDefinition(chooseName(beanClass), definition)
 
-            registerInterceptors(registry, candidateClass)
+            registerInterceptors(registry, beanClass)
         }
     }
 
-    private fun isValid(candidate: Class<*>): Boolean {
+    private fun isValidBean(candidate: Class<*>): Boolean {
         return !candidate.isAnnotationPresent(Alternative::class.java)
-                || registerdAlternatives.contains(candidate.name)
+                || registeredAlternatives.contains(candidate.name)
     }
 
     private fun chooseName(candidateClass: Class<*>): String? {
