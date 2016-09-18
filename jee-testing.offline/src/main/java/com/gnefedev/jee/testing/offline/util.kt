@@ -1,8 +1,12 @@
 package com.gnefedev.jee.testing.offline
 
+import org.junit.runner.RunWith
 import org.w3c.dom.Node
 import org.w3c.dom.NodeList
 import java.lang.reflect.Method
+import javax.ejb.MessageDriven
+import javax.ejb.Stateful
+import javax.ejb.Stateless
 import javax.interceptor.Interceptors
 import javax.naming.InitialContext
 import javax.naming.NamingException
@@ -50,4 +54,18 @@ fun NodeList.toList(): List<Node> {
         nodes.add(item(i))
     }
     return nodes
+}
+
+fun Class<*>.isStateful() = isAnnotationPresent(Stateful::class.java)
+fun Class<*>.isStateless() = isAnnotationPresent(Stateless::class.java)
+fun Class<*>.isMdb() = isAnnotationPresent(MessageDriven::class.java)
+fun Class<*>.isTest(): Boolean {
+    if (!isAnnotationPresent(RunWith::class.java)) {
+        return false
+    } else {
+        return getAnnotation(RunWith::class.java)
+                .value
+                .java
+                .name == "com.gnefedev.jee.testing.junit.JavaeeTestRunner"
+    }
 }

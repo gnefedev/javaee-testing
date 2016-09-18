@@ -39,5 +39,5 @@ internal open class OfflineConfig {
     open fun interceptorAdvisor() = InterceptorAdvisor(interceptor())
 
     @Bean
-    open fun jeeScanner() = JeeScanner()
+    open fun jeeScanner() = JeeScanner
 }

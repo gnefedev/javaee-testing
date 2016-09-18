@@ -22,7 +22,7 @@ public class SampleMdb implements MessageListener {
     @Resource
     private ConnectionFactory connectionFactory;
     @Resource(name = "jms/queue/responseQueue")
-    private Destination responseQueue;
+    private Queue responseQueue;
 
     @Override
     public void onMessage(Message message) {
