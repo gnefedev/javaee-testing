@@ -1,6 +1,0 @@
-<project>
-    <target name="copy">
-        <copyfile src="${artifact.output.path}/../src/main/application/META-INF/application.xml"
-                  dest="${artifact.output.path}/application.xml"/>
-    </target>
-</project>

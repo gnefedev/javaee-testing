@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.gnefedev.javaee.test.suite.SuiteIT
+-------------------------------------------------------------------------------
+Tests run: 22, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.21 sec - in com.gnefedev.javaee.test.suite.SuiteIT

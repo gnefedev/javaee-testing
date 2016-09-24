@@ -5,20 +5,15 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.gnefedev</groupId>
-    <artifactId>javaee.sample</artifactId>
+    <artifactId>jee-testing.bom</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <modules>
-        <module>sample-ejb</module>
-        <module>sample-ear</module>
-        <module>javaee-testing-web</module>
-        <module>jee-testing.core</module>
-        <module>jee-testing.offline</module>
-        <module>jee-testing.internal</module>
+        <module>sample</module>
+        <module>jee-testing</module>
     </modules>
 
     <properties>
-        <sample.version>1.0-SNAPSHOT</sample.version>
         <javaee-testing.version>1.0-SNAPSHOT</javaee-testing.version>
         <encoding>UTF-8</encoding>
         <java-version>1.7</java-version>
@@ -46,18 +41,6 @@
                 <groupId>com.gnefedev</groupId>
                 <artifactId>jee-testing.internal</artifactId>
                 <version>${javaee-testing.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.gnefedev</groupId>
-                <artifactId>javaee-testing-web</artifactId>
-                <version>${javaee-testing.version}</version>
-                <type>war</type>
-            </dependency>
-            <dependency>
-                <groupId>com.gnefedev</groupId>
-                <artifactId>sample-ejb</artifactId>
-                <version>${sample.version}</version>
-                <type>ejb</type>
             </dependency>
 
             <dependency>
