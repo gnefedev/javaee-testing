@@ -1,4 +1,4 @@
 **/target/*
 *.iml
 /.idea/
-/javaee-testing-web/*.log
+**/*.log

@@ -45,6 +45,10 @@ save state among test methods of one test class.
     * @PersistenceContext injection
     * @Transactional annotations
     * bean transaction managements (without setting transaction timeout)
+3. MQ:
+    * Default provider - ActiveMQ
+    * Generate ConnectionFactories, Queues, Topics by fields in EJBs
+    * Create Listener by annotation (CF+destination)
      
 ## Customisation
 Add javaee-testing.properties to you resources in WAR
