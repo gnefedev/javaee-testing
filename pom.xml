@@ -11,6 +11,7 @@
     <modules>
         <module>sample</module>
         <module>jee-testing</module>
+        <module>benchmark</module>
     </modules>
 
     <properties>

@@ -6,40 +6,36 @@
         <artifactId>jee-testing.bom</artifactId>
         <groupId>com.gnefedev</groupId>
         <version>1.0-SNAPSHOT</version>
-        <relativePath>../pom.xml</relativePath>
     </parent>
+    <artifactId>benchmark</artifactId>
+
     <modelVersion>4.0.0</modelVersion>
-
-    <properties>
-        <sample.version>1.0-SNAPSHOT</sample.version>
-    </properties>
-
-    <artifactId>sample</artifactId>
-    <version>1.0-SNAPSHOT</version>
-
     <packaging>pom</packaging>
-
     <modules>
         <module>ejb</module>
-        <module>ear</module>
         <module>test-web</module>
+        <module>ear</module>
     </modules>
+
+    <properties>
+        <benchmark.version>1.0-SNAPSHOT</benchmark.version>
+    </properties>
+
 
     <dependencyManagement>
         <dependencies>
             <dependency>
                 <groupId>com.gnefedev</groupId>
-                <artifactId>sample-test-web</artifactId>
-                <version>${sample.version}</version>
+                <artifactId>benchmark-test-web</artifactId>
+                <version>${benchmark.version}</version>
                 <type>war</type>
             </dependency>
             <dependency>
                 <groupId>com.gnefedev</groupId>
-                <artifactId>sample-ejb</artifactId>
-                <version>${sample.version}</version>
+                <artifactId>benchmark-ejb</artifactId>
+                <version>${benchmark.version}</version>
                 <type>ejb</type>
             </dependency>
         </dependencies>
     </dependencyManagement>
-
 </project>
